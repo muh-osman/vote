@@ -11,6 +11,13 @@ import B from "../../Assets/Images/باهار.webp";
 import C from "../../Assets/Images/ع أمل.webp";
 import D from "../../Assets/Images/لعبة حب.webp";
 import E from "../../Assets/Images/ما فيي.webp";
+// API
+import api from "../../Utils/Api";
+// Cookies
+import { useCookies } from "react-cookie";
+// Toastify
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   // const [ip, setIp] = useState("");
@@ -21,10 +28,13 @@ export default function Home() {
   //     .then((data) => setIp(data.ip))
   //     .catch((error) => console.error("Error fetching IP:", error));
   // }, []);
+  const [cookies, setCookie] = useCookies(["isVoted"]);
 
+  const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
+
   const handleOptionChange = (option) => {
     setSelectedOption(option);
   };
@@ -37,16 +47,52 @@ export default function Home() {
     setPhoneNumber(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // هنا يمكنك إضافة الكود لإرسال البيانات إلى الخادم
-    console.log("الخيار المختار:", selectedOption);
-    console.log("الاسم:", name);
-    console.log("رقم الهاتف:", phoneNumber);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (cookies.isVoted || window.localStorage.getItem("isVoted")) {
+      toast.error("Multiple submissions are not allowed.");
+      return;
+    }
+    setLoading(true);
+    try {
+      const res = await api.post(`api/voters`, {
+        name: name,
+        phone_number: phoneNumber,
+        vote: selectedOption,
+      });
+      // console.log(res);
+      setLoading(false);
+      document.getElementById("overlay").style.height = "100vh";
+      document.querySelector("html").classList.add("stop-scrolling");
+      window.localStorage.setItem("isVoted", "true");
+      setCookie("isVoted", "true");
+    } catch (err) {
+      console.error(err);
+      setLoading(false);
+      const errorMessage =
+        err?.response?.data?.message || err?.message || "An error occurred";
+      // Toastify
+      toast.error(errorMessage);
+    }
   };
 
   return (
     <div className={style.container}>
+      {/* Start Toastify */}
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Bounce}
+      />
+      {/* End Toastify */}
       <nav>
         <div className={style.left_logo}>
           <img src={leftLogo} alt="logo" />
@@ -206,7 +252,9 @@ export default function Home() {
               required
             />
 
-            <button>صوت الآن !</button>
+            <button disabled={loading}>
+              {loading ? <span className="loaderBtn"></span> : "صوت الآن !"}
+            </button>
           </div>
         </form>
       </div>
@@ -214,6 +262,10 @@ export default function Home() {
       <footer>
         جميع الحقوق محفوظة © مهرجان الخليج للإذاعة والتلفزيون 2024
       </footer>
+
+      <div className={style.overlay} id="overlay">
+        <h2>شكرا لمشاركتك في التصويت</h2>
+      </div>
     </div>
   );
 }

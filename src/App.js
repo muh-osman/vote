@@ -8,8 +8,6 @@ import {
 import Layout from "./Layout/Layout";
 import HomeLayout from "./Layout/HomeLayout";
 import Home from "./Pages/Home/Home";
-import Blog from "./Pages/Blog/Blog";
-import About from "./Pages/About/About";
 import LogIn from "./Pages/LogIn/LogIn";
 import SignUp from "./Pages/SignUp/SignUp";
 import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
@@ -31,8 +29,6 @@ export default function App() {
 
         <Route element={<HomeLayout />}>
           <Route index element={<Home />} />
-          <Route path="blog" element={<Blog />} />
-          <Route path="about" element={<About />} />
         </Route>
 
         <Route element={<NotAuth />}>

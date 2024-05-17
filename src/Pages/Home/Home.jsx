@@ -1,7 +1,7 @@
 // SASS
 import style from "./Home.module.scss";
 // React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // Logo
 import leftLogo from "../../Assets/Images/logo-left.jpg";
 import rightLogo from "../../Assets/Images/logo-right.jpg";
@@ -13,10 +13,36 @@ import D from "../../Assets/Images/لعبة حب.webp";
 import E from "../../Assets/Images/ما فيي.webp";
 
 export default function Home() {
-  const [selectedOption, setSelectedOption] = useState(null);
+  // const [ip, setIp] = useState("");
 
+  // useEffect(() => {
+  //   fetch("https://api.ipify.org?format=json")
+  //     .then((response) => response.json())
+  //     .then((data) => setIp(data.ip))
+  //     .catch((error) => console.error("Error fetching IP:", error));
+  // }, []);
+
+  const [name, setName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [selectedOption, setSelectedOption] = useState(null);
   const handleOptionChange = (option) => {
     setSelectedOption(option);
+  };
+
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+
+  const handlePhoneNumberChange = (event) => {
+    setPhoneNumber(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // هنا يمكنك إضافة الكود لإرسال البيانات إلى الخادم
+    console.log("الخيار المختار:", selectedOption);
+    console.log("الاسم:", name);
+    console.log("رقم الهاتف:", phoneNumber);
   };
 
   return (
@@ -32,20 +58,21 @@ export default function Home() {
 
       <h4>جائزة تصويت الجمهور</h4>
       <p dir="rtl">
-        وصف الجائزة هنا وصف الجائزة هنا وصف الجائزة هنا وصف الجائزة هنا وصف
-        الجائزة هنا وصف الجائزة هنا وصف الجائزة هنا
+        ندعوكم للمشاركة في جائزة تصويت الجمهور لجائرة الدانة للدراما ضمن مهرجان
+        الخليج للإذاعة والتلفزيون في دورته السادسة عشرة! تمنحكم هذه الجائزة فرصة
+        اختيار عملكم المفضل من بين مجموعة من الأعمال المرشحة للفوز بالجائزة.
       </p>
 
       <div className={style.form_box}>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className={style.label_box}>
             {/* 1 */}
             <label dir="rtl">
               <div
                 className={`${style.image_box} ${
-                  selectedOption === "option1" ? "activeInput" : ""
+                  selectedOption === "1" ? "activeInput" : ""
                 }`}
-                onClick={() => handleOptionChange("option1")}
+                onClick={() => handleOptionChange("1")}
               >
                 <img src={A} alt="Option 1" />
               </div>
@@ -53,9 +80,10 @@ export default function Home() {
                 <input
                   type="radio"
                   name="options"
-                  value="option1"
-                  checked={selectedOption === "option1"}
-                  onChange={() => handleOptionChange("option1")}
+                  value="1"
+                  checked={selectedOption === "1"}
+                  onChange={() => handleOptionChange("1")}
+                  required
                 />
                 المتوحش
               </div>
@@ -65,9 +93,9 @@ export default function Home() {
             <label dir="rtl">
               <div
                 className={`${style.image_box} ${
-                  selectedOption === "option2" ? "activeInput" : ""
+                  selectedOption === "2" ? "activeInput" : ""
                 }`}
-                onClick={() => handleOptionChange("option2")}
+                onClick={() => handleOptionChange("2")}
               >
                 <img src={B} alt="Option 2" />
               </div>
@@ -75,9 +103,10 @@ export default function Home() {
                 <input
                   type="radio"
                   name="options"
-                  value="option2"
-                  checked={selectedOption === "option2"}
-                  onChange={() => handleOptionChange("option2")}
+                  value="2"
+                  checked={selectedOption === "2"}
+                  onChange={() => handleOptionChange("2")}
+                  required
                 />
                 باهار
               </div>
@@ -87,9 +116,9 @@ export default function Home() {
             <label dir="rtl">
               <div
                 className={`${style.image_box} ${
-                  selectedOption === "option3" ? "activeInput" : ""
+                  selectedOption === "3" ? "activeInput" : ""
                 }`}
-                onClick={() => handleOptionChange("option3")}
+                onClick={() => handleOptionChange("3")}
               >
                 <img src={C} alt="Option 3" />
               </div>
@@ -97,9 +126,10 @@ export default function Home() {
                 <input
                   type="radio"
                   name="options"
-                  value="option3"
-                  checked={selectedOption === "option3"}
-                  onChange={() => handleOptionChange("option3")}
+                  value="3"
+                  checked={selectedOption === "3"}
+                  onChange={() => handleOptionChange("3")}
+                  required
                 />
                 ع أمل
               </div>
@@ -109,9 +139,9 @@ export default function Home() {
             <label dir="rtl">
               <div
                 className={`${style.image_box} ${
-                  selectedOption === "option4" ? "activeInput" : ""
+                  selectedOption === "4" ? "activeInput" : ""
                 }`}
-                onClick={() => handleOptionChange("option4")}
+                onClick={() => handleOptionChange("4")}
               >
                 <img src={D} alt="Option 4" />
               </div>
@@ -119,9 +149,10 @@ export default function Home() {
                 <input
                   type="radio"
                   name="options"
-                  value="option4"
-                  checked={selectedOption === "option4"}
-                  onChange={() => handleOptionChange("option4")}
+                  value="4"
+                  checked={selectedOption === "4"}
+                  onChange={() => handleOptionChange("4")}
+                  required
                 />
                 لعبة حب
               </div>
@@ -131,9 +162,9 @@ export default function Home() {
             <label dir="rtl">
               <div
                 className={`${style.image_box} ${
-                  selectedOption === "option5" ? "activeInput" : ""
+                  selectedOption === "5" ? "activeInput" : ""
                 }`}
-                onClick={() => handleOptionChange("option5")}
+                onClick={() => handleOptionChange("5")}
               >
                 <img src={E} alt="Option 5" />
               </div>
@@ -141,9 +172,10 @@ export default function Home() {
                 <input
                   type="radio"
                   name="options"
-                  value="option5"
-                  checked={selectedOption === "option5"}
-                  onChange={() => handleOptionChange("option5")}
+                  value="5"
+                  checked={selectedOption === "5"}
+                  onChange={() => handleOptionChange("5")}
+                  required
                 />
                 ما فيي
               </div>
@@ -151,16 +183,37 @@ export default function Home() {
           </div>
 
           <div dir="rtl" className={style.name_and_phnone_box}>
+            <h2>معلومات المشارك في التصويت</h2>
             <label htmlFor="name">الأسم الثلاثي</label>
-            <input type="text" name="name" id="name" required />
+            <input
+              onChange={handleNameChange}
+              value={name}
+              dir="auto"
+              type="text"
+              name="name"
+              id="name"
+              required
+            />
 
             <label htmlFor="phone-number">رقم الهاتف</label>
-            <input dir="ltr" type="number" name="number" id="phone-number" required />
+            <input
+              onChange={handlePhoneNumberChange}
+              value={phoneNumber}
+              dir="ltr"
+              type="number"
+              name="number"
+              id="phone-number"
+              required
+            />
 
             <button>صوت الآن !</button>
           </div>
         </form>
       </div>
+
+      <footer>
+        جميع الحقوق محفوظة © مهرجان الخليج للإذاعة والتلفزيون 2024
+      </footer>
     </div>
   );
 }

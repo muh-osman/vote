@@ -186,10 +186,11 @@
     font-family: "Cairo", "Roboto", sans-serif;
     cursor: pointer;
     height: 45px;
-    width: 130px;
+    // width: 130px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: .2s;
 
     &:hover {
       background-color: #a39342;

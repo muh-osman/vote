@@ -75,6 +75,7 @@ export default function Dashboard() {
           "#5eb5ef",
           "#6fcdcd",
           "#c2c4d1",
+          "#7431fa",
         ],
         borderWidth: 2,
       },

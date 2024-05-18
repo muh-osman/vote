@@ -15,6 +15,7 @@ import FirstPageIcon from "@mui/icons-material/FirstPage";
 import KeyboardArrowLeft from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRight from "@mui/icons-material/KeyboardArrowRight";
 import LastPageIcon from "@mui/icons-material/LastPage";
+import TableHead from "@mui/material/TableHead";
 // SASS
 import style from "./Voters.module.scss";
 // API
@@ -91,25 +92,9 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(name, phone, vote) {
-  return { name, phone, vote };
+function createData(id, name, phone, vote) {
+  return { id, name, phone, vote };
 }
-
-const rows = [
-  createData("Cupcake", 305, 3.7),
-  createData("Donut", 452, 25.0),
-  createData("Eclair", 262, 16.0),
-  createData("Frozen yoghurt", 159, 6.0),
-  createData("Gingerbread", 356, 16.0),
-  createData("Honeycomb", 408, 3.2),
-  createData("Ice cream sandwich", 237, 9.0),
-  createData("Jelly Bean", 375, 0.0),
-  createData("KitKat", 518, 26.0),
-  createData("Lollipop", 392, 0.2),
-  createData("Marshmallow", 318, 0),
-  createData("Nougat", 360, 19.0),
-  createData("Oreo", 437, 18.0),
-];
 
 export default function Voters() {
   const [cookies] = useCookies(["token"]);
@@ -150,20 +135,30 @@ export default function Voters() {
     <div className={style.container}>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 500 }} aria-label="custom pagination table">
+          <TableHead>
+            <TableRow>
+              <TableCell style={{ fontWeight: "bold" }}>ID</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Name</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Phone</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Vote</TableCell>
+            </TableRow>
+          </TableHead>
           <TableBody>
             {(rowsPerPage > 0
               ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : data
             ).map((row) => (
               <TableRow key={row.id}>
-                {/* Use `id` instead of `name` for key */}
+                <TableCell component="th" scope="row">
+                  {row.id}
+                </TableCell>
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="right">
+                <TableCell style={{ width: 160 }}>
                   {row.phone_number}
                 </TableCell>
-                <TableCell style={{ width: 160 }} align="right">
+                <TableCell style={{ width: 160 }}>
                   {row.candidate.name}
                 </TableCell>
               </TableRow>

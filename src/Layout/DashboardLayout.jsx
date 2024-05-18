@@ -20,7 +20,7 @@ import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 // Image logo
-import logo from "../Assets/Images/logo-2.jpg";
+import logo from "../Assets/Images/logo-2.png";
 // MUI icons
 import StyleIcon from "@mui/icons-material/Style";
 import DashboardIcon from "@mui/icons-material/Dashboard";

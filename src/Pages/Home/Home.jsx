@@ -1,7 +1,7 @@
 // SASS
 import style from "./Home.module.scss";
 // React
-import { useState, useEffect } from "react";
+import { useState } from "react";
 // Logo
 import leftLogo from "../../Assets/Images/logo-left.jpg";
 import rightLogo from "../../Assets/Images/logo-right.jpg";

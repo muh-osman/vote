@@ -38,7 +38,7 @@ function Copyright(props) {
         onMouseOver={(e) => (e.target.style.color = "#7431fa")}
         onMouseOut={(e) => (e.target.style.color = "inherit")}
       >
-        Your Website
+        Gulf Festival
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}

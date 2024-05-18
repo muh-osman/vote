@@ -31,6 +31,7 @@ const CustomToast = ({ closeToast }) => {
               background-color: transparent;
               color: #0d6efd;
               cursor: pointer;
+              font-size: 16px
             }
             .resendButton:hover {
               color: #0b5ed7;
@@ -39,7 +40,7 @@ const CustomToast = ({ closeToast }) => {
       </style>
 
       <div style={{ cursor: "auto" }}>
-        Please verify your email, or
+        Please confirm your email address ,or&nbsp;
         <button
           className="resendButton"
           onClick={() => {
@@ -48,9 +49,9 @@ const CustomToast = ({ closeToast }) => {
             closeToast(); // Close the toast notification
           }}
         >
-          resend
+           request
         </button>{" "}
-        verification email.
+        a new verification.
       </div>
     </>
   );

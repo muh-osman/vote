@@ -1,9 +1,0 @@
-.container {
-  min-height: calc(100vh - 112px);
-}
-
-@media (max-width: 600px) {
-  .container {
-    min-height: calc(100vh - 104px);
-  }
-}

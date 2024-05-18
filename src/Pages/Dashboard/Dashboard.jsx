@@ -1,7 +1,75 @@
-import style from './Dashboard.module.scss'
+// SASS
+import style from "./Dashboard.module.scss";
+// React
+import { useEffect, useState } from "react";
+// API
+import api from "../../Utils/Api";
+// Cookies
+import { useCookies } from "react-cookie";
+// chart.js
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+
+
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 export default function Dashboard() {
+  const [cookies] = useCookies(["token"]);
+  const [labels, setLabels] = useState([]);
+  const [candidateCount, setCandidateCount] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await api.get(`api/candidates/votes`, {
+          headers: { Authorization: `Bearer ${cookies.token}` },
+        });
+        // console.log(res.data);
+        // setCandidateCount(res.data);
+
+        // إنشاء مصفوفة العناوين بناءً على البيانات المسترجعة
+        const newLabels = res.data.map((candidate) => candidate.candidate_name);
+        // console.log(newLabels);
+        setLabels(newLabels);
+
+        // إنشاء كائن جديد للحالة بناءً على البيانات المسترجعة
+        const newCandidateCount = res.data.reduce((acc, candidate) => {
+          acc[`candidate_${candidate.candidate_id}`] = candidate.votes;
+          return acc;
+        }, {});
+        // console.log(newCandidateCount);
+        setCandidateCount(newCandidateCount);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const data = {
+    labels: labels,
+    datasets: [
+      {
+        label: "",
+        data: Object.values(candidateCount),
+        backgroundColor: [
+          "#ff829d",
+          "#ffd778",
+          "#5eb5ef",
+          "#6fcdcd",
+          "#c2c4d1",
+        ],
+        borderWidth: 2,
+      },
+    ],
+  };
+
   return (
-    <div className={style.container}>Dashboard</div>
-  )
+    <div className={style.container}>
+      <div className={style.box}>
+        <Doughnut data={data} options={{ responsive: true }} />
+      </div>
+    </div>
+  );
 }

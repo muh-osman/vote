@@ -26,6 +26,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // Resend verification email (http://localhost:8000/api/resend-verify-email)
     Route::post('/resend-verify-email', [UserController::class, 'resendVerifyEmail']);
+
+
+
+    // API route to add candidates  (http://localhost:8000/api/candidates) [name]
+    Route::post('/candidates', [CandidateController::class, 'store']);
+
+    // API route to get votes Count for all candidates  (http://localhost:8000/api/candidates/votes)
+    Route::get('/candidates/votes', [CandidateController::class, 'votesCount']);
 });
 
 
@@ -48,14 +56,9 @@ Route::middleware('guest')->group(function () {
 
 
 
-    // API route to add candidates  (http://localhost:8000/api/candidates) [name]
-    Route::post('/candidates', [CandidateController::class, 'store']);
-    // API route to get votes Count for all candidates  (http://localhost:8000/api/candidates/votes)
-    Route::get('/candidates/votes', [CandidateController::class, 'votesCount']);
+
     // API route to vote  (http://localhost:8000/api/voters) [name, phone_number, vote]
     Route::post('/voters', [VoterController::class, 'store']);
-
-
 
 });
 

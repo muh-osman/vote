@@ -40,7 +40,7 @@ function Copyright(props) {
         onMouseOver={(e) => (e.target.style.color = "#7431fa")}
         onMouseOut={(e) => (e.target.style.color = "inherit")}
       >
-        Your Website
+        Gulf Festival
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -200,7 +200,7 @@ export default function LogIn() {
                 Log in
               </LoadingButton>
 
-              <Grid container>
+              {/* <Grid container>
                 <Grid item xs>
                   <Link
                     component={RouterLink}
@@ -215,7 +215,7 @@ export default function LogIn() {
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
-              </Grid>
+              </Grid> */}
               <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>

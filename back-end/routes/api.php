@@ -34,6 +34,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     // API route to get votes Count for all candidates  (http://localhost:8000/api/candidates/votes)
     Route::get('/candidates/votes', [CandidateController::class, 'votesCount']);
+
+    // API route to get all voters detailes   (http://localhost:8000/api/voters)
+    Route::get('/voters', [VoterController::class, 'index']);
 });
 
 

@@ -7,11 +7,27 @@ import api from "../../Utils/Api";
 // Cookies
 import { useCookies } from "react-cookie";
 // chart.js
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import { Doughnut, Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+} from "chart.js";
 
-
-ChartJS.register(ArcElement, Tooltip, Legend);
+ChartJS.register(
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 export default function Dashboard() {
   const [cookies] = useCookies(["token"]);
@@ -65,10 +81,28 @@ export default function Dashboard() {
     ],
   };
 
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "نتائج تصويت الجمهور لجائرة الدانة للدراما",
+      },
+    },
+  };
+
   return (
     <div className={style.container}>
       <div className={style.box}>
         <Doughnut data={data} options={{ responsive: true }} />
+      </div>
+
+      <div className={style.box_two}>
+        <Bar data={data} options={options} />
       </div>
     </div>
   );

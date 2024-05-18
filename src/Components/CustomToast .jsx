@@ -40,7 +40,7 @@ const CustomToast = ({ closeToast }) => {
       </style>
 
       <div style={{ cursor: "auto" }}>
-        Please confirm your email address ,or&nbsp;
+        Please confirm your email address, or&nbsp;
         <button
           className="resendButton"
           onClick={() => {

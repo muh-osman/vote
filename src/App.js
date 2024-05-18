@@ -17,8 +17,9 @@ import Auth from "./Utils/Auth";
 import NotAuth from "./Utils/NotAuth";
 import DashboardLayout from "./Layout/DashboardLayout";
 import Dashboard from "./Pages/Dashboard/Dashboard";
-import Add from "./Pages/Dashboard/Add/Add";
-import Edit from "./Pages/Dashboard/Edit/Edit";
+import Voters from "./Pages/Dashboard/Voters/Voters";
+// import Add from "./Pages/Dashboard/Add/Add";
+// import Edit from "./Pages/Dashboard/Edit/Edit";
 import NotFound from "./Pages/NotFound/NotFound";
 
 
@@ -44,8 +45,9 @@ export default function App() {
         {/* Start protected route */}
           <Route path="dashboard" element={<DashboardLayout />}>
             <Route index element={<Dashboard />} />
-            <Route path="add" element={<Add />} />
-            <Route path="edit" element={<Edit />} />
+            <Route path="voters" element={<Voters />} />
+            {/* <Route path="add" element={<Add />} /> */}
+            {/* <Route path="edit" element={<Edit />} /> */}
           </Route>
         {/* End protected route */}
         </Route>

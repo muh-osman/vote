@@ -18,14 +18,15 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 import Avatar from "@mui/material/Avatar";
 import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
+// import Button from "@mui/material/Button";
 // Image logo
 import logo from "../Assets/Images/logo-2.png";
 // MUI icons
-import StyleIcon from "@mui/icons-material/Style";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
-import AddBoxIcon from "@mui/icons-material/AddBox";
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+// import StyleIcon from "@mui/icons-material/Style";
+// import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
+// import AddBoxIcon from "@mui/icons-material/AddBox";
 // React router
 import { Link, useLocation, Outlet, useNavigate } from "react-router-dom";
 // API
@@ -72,16 +73,22 @@ function ResponsiveDrawer(props) {
     },
     {
       id: 2,
-      title: "Add",
-      path: "/dashboard/add",
-      icon: <AddBoxIcon sx={{ color: "#757575" }} />,
+      title: "Voters",
+      path: "/dashboard/voters",
+      icon: <PeopleAltIcon sx={{ color: "#757575" }} />,
     },
-    {
-      id: 3,
-      title: "Edit",
-      path: "/dashboard/edit",
-      icon: <AutoFixHighIcon sx={{ color: "#757575" }} />,
-    },
+    // {
+    //   id: 2,
+    //   title: "Add",
+    //   path: "/dashboard/add",
+    //   icon: <AddBoxIcon sx={{ color: "#757575" }} />,
+    // },
+    // {
+    //   id: 3,
+    //   title: "Edit",
+    //   path: "/dashboard/edit",
+    //   icon: <AutoFixHighIcon sx={{ color: "#757575" }} />,
+    // },
   ];
 
   const { pathname } = useLocation();
@@ -96,10 +103,7 @@ function ResponsiveDrawer(props) {
   const drawer = (
     <div>
       <Toolbar style={{ justifyContent: "center" }}>
-        <Link
-          to="/"
-          style={{ textDecoration: "none", color: "#fff" }}
-        >
+        <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
           <Stack direction="row" spacing={2} sx={{ alignItems: "center" }}>
             <Avatar
               alt="Remy Sharp"

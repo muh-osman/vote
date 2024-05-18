@@ -62,7 +62,7 @@ export default function Home() {
         vote: selectedOption,
       });
       // console.log(res);
-      setLoading(false);
+      // setLoading(false);
       document.getElementById("overlay").style.height = "100vh";
       document.querySelector("html").classList.add("stop-scrolling");
       window.localStorage.setItem("isVoted", "true");

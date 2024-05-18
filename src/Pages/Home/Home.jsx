@@ -6,11 +6,12 @@ import { useState } from "react";
 import leftLogo from "../../Assets/Images/logo-left.jpg";
 import rightLogo from "../../Assets/Images/logo-right.jpg";
 // Images
-import A from "../../Assets/Images/المتوحش.webp";
-import B from "../../Assets/Images/باهار.webp";
-import C from "../../Assets/Images/ع أمل.webp";
-import D from "../../Assets/Images/لعبة حب.webp";
-import E from "../../Assets/Images/ما فيي.webp";
+import A from "../../Assets/Images/a.jpg";
+import B from "../../Assets/Images/b.jpg";
+import C from "../../Assets/Images/c.jpg";
+import D from "../../Assets/Images/d.jpg";
+import E from "../../Assets/Images/e.jpg";
+import F from "../../Assets/Images/f.jpg";
 // API
 import api from "../../Utils/Api";
 // Cookies
@@ -131,7 +132,7 @@ export default function Home() {
                   onChange={() => handleOptionChange("1")}
                   required
                 />
-                المتوحش
+                البوم
               </div>
             </label>
 
@@ -154,7 +155,7 @@ export default function Home() {
                   onChange={() => handleOptionChange("2")}
                   required
                 />
-                باهار
+                ثانوية النسيم
               </div>
             </label>
 
@@ -177,7 +178,7 @@ export default function Home() {
                   onChange={() => handleOptionChange("3")}
                   required
                 />
-                ع أمل
+                الخن
               </div>
             </label>
 
@@ -200,7 +201,7 @@ export default function Home() {
                   onChange={() => handleOptionChange("4")}
                   required
                 />
-                لعبة حب
+                غسيل
               </div>
             </label>
 
@@ -223,7 +224,30 @@ export default function Home() {
                   onChange={() => handleOptionChange("5")}
                   required
                 />
-                ما فيي
+                خيوط المعازيب
+              </div>
+            </label>
+
+            {/* 6 */}
+            <label dir="rtl">
+              <div
+                className={`${style.image_box} ${
+                  selectedOption === "6" ? "activeInput" : ""
+                }`}
+                onClick={() => handleOptionChange("6")}
+              >
+                <img src={F} alt="Option 6" />
+              </div>
+              <div className={style.label_text_box}>
+                <input
+                  type="radio"
+                  name="options"
+                  value="6"
+                  checked={selectedOption === "6"}
+                  onChange={() => handleOptionChange("6")}
+                  required
+                />
+                رمضان شريف
               </div>
             </label>
           </div>

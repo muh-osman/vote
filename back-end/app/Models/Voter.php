@@ -9,7 +9,7 @@ class Voter extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'phone_number', 'vote'];
+    protected $fillable = ['internet_protocol', 'name', 'phone_number', 'vote'];
 
     // Voter has one vote for a candidate
     public function candidate()

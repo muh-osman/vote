@@ -1,7 +1,7 @@
 // SASS
 import style from "./Home.module.scss";
 // React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // Logo
 import leftLogo from "../../Assets/Images/logo-left.jpg";
 import rightLogo from "../../Assets/Images/logo-right.jpg";
@@ -12,6 +12,10 @@ import C from "../../Assets/Images/c.jpg";
 import D from "../../Assets/Images/d.jpg";
 import E from "../../Assets/Images/e.jpg";
 import F from "../../Assets/Images/f.jpg";
+import G from "../../Assets/Images/g.jpeg";
+import H from "../../Assets/Images/h.jpeg";
+import I from "../../Assets/Images/i.jpeg";
+import J from "../../Assets/Images/j.jpeg";
 // API
 import api from "../../Utils/Api";
 // Cookies
@@ -19,22 +23,35 @@ import { useCookies } from "react-cookie";
 // Toastify
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// intl-tel-input
+// import IntlTelInput from "intl-tel-input/react";
 
 export default function Home() {
-  // const [ip, setIp] = useState("");
-
-  // useEffect(() => {
-  //   fetch("https://api.ipify.org?format=json")
-  //     .then((response) => response.json())
-  //     .then((data) => setIp(data.ip))
-  //     .catch((error) => console.error("Error fetching IP:", error));
-  // }, []);
   const [cookies, setCookie] = useCookies(["isVoted"]);
 
+  const [ip, setIp] = useState("");
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
+
+  // initialValue={value}
+  // onChangeNumber={setNumber}
+  // onChangeValidity={setIsValid}
+  // onChangeErrorCode={setErrorCode}
+
+  const [value, setValue] = useState("");
+  const [number, setNumber] = useState("");
+  const [valid, setIsValid] = useState(false);
+  const [error, setErrorCode] = useState(false);
+
+
+  useEffect(() => {
+    fetch("https://api.ipify.org?format=json")
+      .then((response) => response.json())
+      .then((data) => setIp(data.ip))
+      .catch((error) => console.error("Error fetching IP:", error));
+  }, []);
 
   const handleOptionChange = (option) => {
     setSelectedOption(option);
@@ -50,13 +67,26 @@ export default function Home() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (cookies.isVoted || window.localStorage.getItem("isVoted")) {
       toast.error("Multiple submissions are not allowed.");
       return;
     }
+
+    if (name.length < 3) {
+      toast.error("Enter valid name");
+      return;
+    }
+
+    if (phoneNumber.length < 8) {
+      toast.error("Enter valid phone number");
+      return;
+    }
+
     setLoading(true);
     try {
       const res = await api.post(`api/voters`, {
+        internet_protocol: ip,
         name: name,
         phone_number: phoneNumber,
         vote: selectedOption,
@@ -250,6 +280,98 @@ export default function Home() {
                 رمضان شريف
               </div>
             </label>
+
+            {/* 7 */}
+            <label dir="rtl">
+              <div
+                className={`${style.image_box} ${
+                  selectedOption === "7" ? "activeInput" : ""
+                }`}
+                onClick={() => handleOptionChange("7")}
+              >
+                <img src={G} alt="Option 7" />
+              </div>
+              <div className={style.label_text_box}>
+                <input
+                  type="radio"
+                  name="options"
+                  value="7"
+                  checked={selectedOption === "7"}
+                  onChange={() => handleOptionChange("7")}
+                  required
+                />
+                الشرار
+              </div>
+            </label>
+
+            {/* 8 */}
+            <label dir="rtl">
+              <div
+                className={`${style.image_box} ${
+                  selectedOption === "8" ? "activeInput" : ""
+                }`}
+                onClick={() => handleOptionChange("8")}
+              >
+                <img src={H} alt="Option 8" />
+              </div>
+              <div className={style.label_text_box}>
+                <input
+                  type="radio"
+                  name="options"
+                  value="8"
+                  checked={selectedOption === "8"}
+                  onChange={() => handleOptionChange("8")}
+                  required
+                />
+                بيت أبونا
+              </div>
+            </label>
+
+            {/* 9 */}
+            <label dir="rtl">
+              <div
+                className={`${style.image_box} ${
+                  selectedOption === "9" ? "activeInput" : ""
+                }`}
+                onClick={() => handleOptionChange("9")}
+              >
+                <img src={I} alt="Option 9" />
+              </div>
+              <div className={style.label_text_box}>
+                <input
+                  type="radio"
+                  name="options"
+                  value="9"
+                  checked={selectedOption === "9"}
+                  onChange={() => handleOptionChange("9")}
+                  required
+                />
+                سندس ٢
+              </div>
+            </label>
+
+            {/* 10 */}
+            <label dir="rtl">
+              <div
+                className={`${style.image_box} ${
+                  selectedOption === "10" ? "activeInput" : ""
+                }`}
+                onClick={() => handleOptionChange("10")}
+              >
+                <img src={J} alt="Option 10" />
+              </div>
+              <div className={style.label_text_box}>
+                <input
+                  type="radio"
+                  name="options"
+                  value="10"
+                  checked={selectedOption === "10"}
+                  onChange={() => handleOptionChange("10")}
+                  required
+                />
+                كلاود كيتشن
+              </div>
+            </label>
           </div>
 
           <div dir="rtl" className={style.name_and_phnone_box}>
@@ -276,8 +398,21 @@ export default function Home() {
               required
             />
 
+            {/* <IntlTelInput
+              initialValue={value}
+              onChangeNumber={setNumber}
+              onChangeValidity={setIsValid}
+              onChangeErrorCode={setErrorCode}
+              // any initialisation options from the readme will work here
+              initOptions={{
+                initialCountry: "bh",
+                utilsScript: "/intl-tel-input/js/utils.js?1715508103106",
+              }}
+            /> */}
+
             <button disabled={loading}>
-              {loading ? <span className="loaderBtn"></span> : "صوت الآن !"}
+              صوت الآن !
+              {/* {loading ? <span className="loaderBtn"></span> : "صوت الآن !"} */}
             </button>
           </div>
         </form>

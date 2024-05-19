@@ -59,11 +59,7 @@ Route::middleware('guest')->group(function () {
 
 
 
-
     // API route to vote  (http://localhost:8000/api/voters) [name, phone_number, vote]
     Route::post('/voters', [VoterController::class, 'store']);
 
 });
-
-
-

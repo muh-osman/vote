@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('voters', function (Blueprint $table) {
             $table->id();
+            $table->string('internet_protocol')->unique();
             $table->string('name');
             $table->string('phone_number')->unique();
             $table->unsignedBigInteger('vote');

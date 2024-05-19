@@ -23,6 +23,7 @@ class VoterController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'internet_protocol' => 'required|unique:voters|max:255',
             'name' => 'required|max:255',
             'phone_number' => 'required|unique:voters|max:255',
             'vote' => 'required|exists:candidates,id',
@@ -48,15 +49,7 @@ class VoterController extends Controller
      */
     public function update(Request $request, Voter $voter)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'phone_number' => 'required|unique:voters,phone_number,' . $id . '|max:255',
-            'vote' => 'required|exists:candidates,id',
-        ]);
-
-        $voter = Voter::findOrFail($id);
-        $voter->update($validatedData);
-        return response()->json($voter);
+        //
     }
 
 

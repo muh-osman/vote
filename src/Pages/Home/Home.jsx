@@ -35,15 +35,6 @@ export default function Home() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
 
-  // initialValue={value}
-  // onChangeNumber={setNumber}
-  // onChangeValidity={setIsValid}
-  // onChangeErrorCode={setErrorCode}
-
-  const [value, setValue] = useState("");
-  const [number, setNumber] = useState("");
-  const [valid, setIsValid] = useState(false);
-  const [error, setErrorCode] = useState(false);
 
 
   useEffect(() => {

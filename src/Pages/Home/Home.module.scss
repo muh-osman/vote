@@ -224,15 +224,47 @@
   height: 0vh;
   transition: 0.3s;
   overflow: hidden;
-  background: url(../../Assets/Images/background.jpg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
+  // background: url(../../Assets/Images/background.jpg);
+  // background-repeat: no-repeat;
+  // background-position: center;
+  // background-size: cover;
 
+  div {
+    position: absolute;
+    bottom: 75px;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 9999999;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
 
-}
+  h2 {
+    width: 100%;
+    text-align: center;
+    color: #f1f1f1;
+    font-weight: 800;
+    // width: 100%;
+    font-size: 32px;
+    width: fit-content;
+    border: 3px solid #c5b152;
+    border-radius: 16px;
+    padding: 0 10px;
+  }
 
-.overlay h2 {
-  color: #fff;
-  font-weight: 800;
+  h1 {
+    font-weight: 900;
+    font-size: 64px;
+    width: 100%;
+    text-align: center;
+    color: #c5b152;
+  }
+
+  .big {
+    height: 100%;
+    object-fit: cover;
+  }
 }

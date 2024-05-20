@@ -16,6 +16,7 @@ import G from "../../Assets/Images/g.jpeg";
 import H from "../../Assets/Images/h.jpeg";
 import I from "../../Assets/Images/i.jpeg";
 import J from "../../Assets/Images/j.jpeg";
+import overlay from "../../Assets/Images/background.jpg";
 // API
 import api from "../../Utils/Api";
 // Cookies
@@ -414,7 +415,11 @@ export default function Home() {
       </footer>
 
       <div className={style.overlay} id="overlay">
-        <h2>شكرا لمشاركتك في التصويت</h2>
+        <div>
+          <h1>شكرا</h1>
+          <h2>لمشاركتك في التصويت</h2>
+        </div>
+        <img className={style.big} src={overlay} alt="overlay" />
       </div>
     </div>
   );

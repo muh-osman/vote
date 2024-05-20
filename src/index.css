@@ -64,3 +64,25 @@ th,
 td {
   text-align: center !important;
 }
+
+.PhoneInputCountryIcon,
+.PhoneInputCountrySelectArrow {
+  color: #f1f1f1 !important;
+}
+
+.PhoneInput {
+  position: relative !important;
+  width: 66% !important;
+}
+
+.PhoneInputCountry {
+  position: absolute !important;
+  /* background-color: red; */
+  left: -32px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.PhoneInputCountrySelectArrow {
+  display: none !important;
+}

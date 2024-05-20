@@ -24,11 +24,14 @@ import { useCookies } from "react-cookie";
 // Toastify
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+//
+import "react-phone-number-input/style.css";
+import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input";
 
 export default function Home() {
   const [cookies, setCookie] = useCookies(["isVoted"]);
 
-  const [ip, setIp] = useState("");
+  // const [ip, setIp] = useState("");
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -39,9 +42,9 @@ export default function Home() {
     fetch("https://ipapi.co/json/")
       .then((response) => response.json())
       .then((data) => {
-        setIp(data.ip);
-        setCountryCode(data.country_calling_code);
-        setPhoneNumber(data.country_calling_code);
+        // setIp(data.ip);
+        setCountryCode(data.country_code);
+        // setPhoneNumber(data.country_calling_code);
       })
       .catch((error) => console.error("Error fetching IP:", error));
   }, []);
@@ -54,19 +57,18 @@ export default function Home() {
     setName(event.target.value);
   };
 
-  const handlePhoneNumberChange = (event) => {
-    // Get the current input value
-    const input = event.target.value;
-
-    // Check if the input is shorter than the country code, which means backspace was hit
-    if (input.length < countryCode.length) {
-      // Set the phone number to just the country code
-      setPhoneNumber(countryCode);
-    } else {
-      // Otherwise, update the phone number with the new input
-      setPhoneNumber(input);
-    }
-  };
+  // const handlePhoneNumberChange = (event) => {
+  // // Get the current input value
+  // const input = event.target.value;
+  // // Check if the input is shorter than the country code, which means backspace was hit
+  // if (input.length < countryCode.length) {
+  //   // Set the phone number to just the country code
+  //   setPhoneNumber(countryCode);
+  // } else {
+  //   // Otherwise, update the phone number with the new input
+  //   setPhoneNumber(input);
+  // }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -81,7 +83,7 @@ export default function Home() {
       return;
     }
 
-    if (phoneNumber.length < 8) {
+    if (!isPossiblePhoneNumber(phoneNumber)) {
       toast.warn("أدخل رقم هاتف صالح.");
       return;
     }
@@ -95,6 +97,7 @@ export default function Home() {
         phone_number: phoneNumber,
         vote: selectedOption,
       });
+
       // console.log(res);
       // setLoading(false);
       document.getElementById("overlay").style.height = "100vh";
@@ -392,7 +395,7 @@ export default function Home() {
             />
 
             <label htmlFor="phone-number">رقم الهاتف</label>
-            <input
+            {/* <input
               onChange={handlePhoneNumberChange}
               value={phoneNumber}
               dir="ltr"
@@ -400,7 +403,16 @@ export default function Home() {
               name="number"
               id="phone-number"
               required
-            />
+            /> */}
+
+            <div dir="ltr" className={style.phone_box}>
+              <PhoneInput
+                international
+                value={phoneNumber}
+                onChange={setPhoneNumber}
+                defaultCountry={countryCode}
+              />
+            </div>
 
             <button disabled={loading}>
               صوت الآن !

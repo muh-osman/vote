@@ -268,3 +268,17 @@
     object-fit: cover;
   }
 }
+
+//
+.phone_box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  input {
+    margin: 0;
+    width: 100%;
+    // flex-grow: 0 !important;
+    // flex-shrink: 0 !important;
+  }
+}

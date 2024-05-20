@@ -23,8 +23,6 @@ import { useCookies } from "react-cookie";
 // Toastify
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// intl-tel-input
-// import IntlTelInput from "intl-tel-input/react";
 
 export default function Home() {
   const [cookies, setCookie] = useCookies(["isVoted"]);
@@ -34,13 +32,16 @@ export default function Home() {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [selectedOption, setSelectedOption] = useState(null);
-
-
+  const [countryCode, setCountryCode] = useState("");
 
   useEffect(() => {
-    fetch("https://api.ipify.org?format=json")
+    fetch("https://ipapi.co/json/")
       .then((response) => response.json())
-      .then((data) => setIp(data.ip))
+      .then((data) => {
+        setIp(data.ip);
+        setCountryCode(data.country_calling_code);
+        setPhoneNumber(data.country_calling_code);
+      })
       .catch((error) => console.error("Error fetching IP:", error));
   }, []);
 
@@ -53,7 +54,17 @@ export default function Home() {
   };
 
   const handlePhoneNumberChange = (event) => {
-    setPhoneNumber(event.target.value);
+    // Get the current input value
+    const input = event.target.value;
+
+    // Check if the input is shorter than the country code, which means backspace was hit
+    if (input.length < countryCode.length) {
+      // Set the phone number to just the country code
+      setPhoneNumber(countryCode);
+    } else {
+      // Otherwise, update the phone number with the new input
+      setPhoneNumber(input);
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -383,23 +394,11 @@ export default function Home() {
               onChange={handlePhoneNumberChange}
               value={phoneNumber}
               dir="ltr"
-              type="number"
+              type="tel"
               name="number"
               id="phone-number"
               required
             />
-
-            {/* <IntlTelInput
-              initialValue={value}
-              onChangeNumber={setNumber}
-              onChangeValidity={setIsValid}
-              onChangeErrorCode={setErrorCode}
-              // any initialisation options from the readme will work here
-              initOptions={{
-                initialCountry: "bh",
-                utilsScript: "/intl-tel-input/js/utils.js?1715508103106",
-              }}
-            /> */}
 
             <button disabled={loading}>
               صوت الآن !

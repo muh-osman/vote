@@ -71,24 +71,25 @@ export default function Home() {
     e.preventDefault();
 
     if (cookies.isVoted || window.localStorage.getItem("isVoted")) {
-      toast.error("Multiple submissions are not allowed.");
+      toast.warn("عذراً .. لقد قمت بالتصويت مسبقاً.");
       return;
     }
 
     if (name.length < 3) {
-      toast.error("Enter valid name");
+      toast.warn("أدخل اسم صالح.");
       return;
     }
 
     if (phoneNumber.length < 8) {
-      toast.error("Enter valid phone number");
+      toast.warn("أدخل رقم هاتف صالح.");
       return;
     }
 
     setLoading(true);
     try {
       const res = await api.post(`api/voters`, {
-        internet_protocol: ip,
+        internet_protocol:
+          Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000,
         name: name,
         phone_number: phoneNumber,
         vote: selectedOption,
@@ -105,7 +106,7 @@ export default function Home() {
       const errorMessage =
         err?.response?.data?.message || err?.message || "An error occurred";
       // Toastify
-      toast.error(errorMessage);
+      toast.warn("عذراً .. لقد قمت بالتصويت مسبقاً.");
     }
   };
 
@@ -118,7 +119,7 @@ export default function Home() {
         hideProgressBar
         newestOnTop={false}
         closeOnClick
-        rtl={false}
+        rtl={true}
         pauseOnFocusLoss
         draggable
         pauseOnHover

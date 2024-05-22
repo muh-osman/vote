@@ -238,7 +238,7 @@ export default function Home() {
                   onChange={() => handleOptionChange("4")}
                   required
                 />
-                غسيل
+                سكة سفر 3
               </div>
             </label>
 

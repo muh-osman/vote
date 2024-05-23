@@ -45,7 +45,12 @@ export default function Home() {
         setIp(data.ip);
         setCountryCode(data.country_code);
       })
-      .catch((error) => console.error("Error fetching IP:", error));
+      .catch((error) => {
+        console.error("Error fetching IP:", error);
+        // If get ip failed
+        setIp(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000);
+        setCountryCode("BH");
+      });
   }, []);
 
   const handleOptionChange = (option) => {
@@ -82,6 +87,7 @@ export default function Home() {
         phone_number: phoneNumber,
         vote: selectedOption,
       });
+
 
       // console.log(res);
       // setLoading(false);

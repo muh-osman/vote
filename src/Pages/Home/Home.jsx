@@ -31,7 +31,7 @@ import PhoneInput, { isPossiblePhoneNumber } from "react-phone-number-input";
 export default function Home() {
   const [cookies, setCookie] = useCookies(["isVoted"]);
 
-  // const [ip, setIp] = useState("");
+  const [ip, setIp] = useState("");
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -42,9 +42,8 @@ export default function Home() {
     fetch("https://ipapi.co/json/")
       .then((response) => response.json())
       .then((data) => {
-        // setIp(data.ip);
+        setIp(data.ip);
         setCountryCode(data.country_code);
-        // setPhoneNumber(data.country_calling_code);
       })
       .catch((error) => console.error("Error fetching IP:", error));
   }, []);
@@ -56,19 +55,6 @@ export default function Home() {
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
-
-  // const handlePhoneNumberChange = (event) => {
-  // // Get the current input value
-  // const input = event.target.value;
-  // // Check if the input is shorter than the country code, which means backspace was hit
-  // if (input.length < countryCode.length) {
-  //   // Set the phone number to just the country code
-  //   setPhoneNumber(countryCode);
-  // } else {
-  //   // Otherwise, update the phone number with the new input
-  //   setPhoneNumber(input);
-  // }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -91,8 +77,7 @@ export default function Home() {
     setLoading(true);
     try {
       const res = await api.post(`api/voters`, {
-        internet_protocol:
-          Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000,
+        internet_protocol: ip,
         name: name,
         phone_number: phoneNumber,
         vote: selectedOption,

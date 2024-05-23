@@ -39,18 +39,40 @@ export default function Home() {
   const [countryCode, setCountryCode] = useState("");
 
   useEffect(() => {
-    fetch("https://ipapi.co/json/")
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://ipapi.co/json/");
+        if (!response.ok) {
+          throw new Error(
+            `Failed to fetch from ipapi.co with status ${response.status}`
+          );
+        }
+        const data = await response.json();
         setIp(data.ip);
         setCountryCode(data.country_code);
-      })
-      .catch((error) => {
-        console.error("Error fetching IP:", error);
-        // If get ip failed
-        setIp(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000);
-        setCountryCode("BH");
-      });
+      } catch (error) {
+        console.error("Error fetching IP from ipapi.co:", error);
+        // Fallback to ipinfo.io
+        try {
+          // Blocked in syria
+          const response = await fetch(
+            "https://ipinfo.io/json?token=3215c7cb6b3df7"
+          );
+          if (!response.ok) {
+            throw new Error(
+              `Failed to fetch from ipinfo.io with status ${response.status}`
+            );
+          }
+          const jsonResponse = await response.json();
+          setIp(jsonResponse.ip);
+          setCountryCode(jsonResponse.country); // Assuming country code exists in ipinfo.io response
+        } catch (error) {
+          console.error("Error fetching IP fallback from ipinfo.io:", error);
+        }
+      }
+    };
+
+    fetchData();
   }, []);
 
   const handleOptionChange = (option) => {
@@ -88,6 +110,10 @@ export default function Home() {
         vote: selectedOption,
       });
 
+      // console.log(ip);
+      // console.log(name);
+      // console.log(phoneNumber);
+      // console.log(selectedOption);
 
       // console.log(res);
       // setLoading(false);

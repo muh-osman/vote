@@ -48,8 +48,8 @@ export default function Home() {
           );
         }
         const data = await response.json();
-        setIp(data.ip);
-        // setIp(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000);
+        // setIp(data.ip);
+        setIp(Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000);
         setCountryCode(data.country_code);
       } catch (error) {
         console.error("Error fetching IP from ipapi.co:", error);
@@ -65,10 +65,10 @@ export default function Home() {
             );
           }
           const jsonResponse = await response.json();
-          setIp(jsonResponse.ip);
-          // setIp(
-          //   Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000
-          // );
+          // setIp(jsonResponse.ip);
+          setIp(
+            Math.floor(Math.random() * (99999999 - 10000000 + 1)) + 10000000
+          );
           setCountryCode(jsonResponse.country); // Assuming country code exists in ipinfo.io response
         } catch (error) {
           console.error("Error fetching IP fallback from ipinfo.io:", error);

@@ -31,30 +31,15 @@ ChartJS.register(
 
 export default function Dashboard() {
   const [cookies] = useCookies(["token"]);
-  const [labels, setLabels] = useState([]);
-  const [candidateCount, setCandidateCount] = useState({});
+  const [analyticsData, setAnalyticsData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await api.get(`api/candidates/votes`, {
+        const res = await api.get(`api/analytics`, {
           headers: { Authorization: `Bearer ${cookies.token}` },
         });
-        // console.log(res.data);
-        // setCandidateCount(res.data);
-
-        // إنشاء مصفوفة العناوين بناءً على البيانات المسترجعة
-        const newLabels = res.data.map((candidate) => candidate.candidate_name);
-        // console.log(newLabels);
-        setLabels(newLabels);
-
-        // إنشاء كائن جديد للحالة بناءً على البيانات المسترجعة
-        const newCandidateCount = res.data.reduce((acc, candidate) => {
-          acc[`candidate_${candidate.candidate_id}`] = candidate.votes;
-          return acc;
-        }, {});
-        // console.log(newCandidateCount);
-        setCandidateCount(newCandidateCount);
+        setAnalyticsData(res.data.data);
       } catch (err) {
         console.error(err);
       }
@@ -63,12 +48,17 @@ export default function Dashboard() {
     fetchData();
   }, []);
 
-  const data = {
-    labels: labels,
+  if (!analyticsData) {
+    return <div className={style.container}>Loading...</div>;
+  }
+
+  // Prepare series data for chart
+  const seriesData = {
+    labels: analyticsData.series_votes.map((series) => series.series_name),
     datasets: [
       {
-        label: "",
-        data: Object.values(candidateCount),
+        label: "Votes Count",
+        data: analyticsData.series_votes.map((series) => series.votes_count),
         backgroundColor: [
           "#ff829d",
           "#ffd778",
@@ -76,38 +66,164 @@ export default function Dashboard() {
           "#6fcdcd",
           "#c2c4d1",
           "#e2e2fa",
-          "#f0e68c",
-          "#ffe4e1",
-          "#98fb98",
-          "#afeeee",
         ],
         borderWidth: 2,
       },
     ],
   };
 
-  const options = {
+  // Prepare male actors data for chart
+  const maleActorsData = {
+    labels: analyticsData.male_actor_votes.map((actor) => actor.actor_name),
+    datasets: [
+      {
+        label: "Votes Count",
+        data: analyticsData.male_actor_votes.map((actor) => actor.votes_count),
+        backgroundColor: [
+          "#5eb5ef",
+          "#6fcdcd",
+          "#c2c4d1",
+          "#e2e2fa",
+          "#f0e68c",
+          "#ffe4e1",
+        ],
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  // Prepare female actors data for chart
+  const femaleActorsData = {
+    labels: analyticsData.female_actor_votes.map((actor) => actor.actor_name),
+    datasets: [
+      {
+        label: "Votes Count",
+        data: analyticsData.female_actor_votes.map(
+          (actor) => actor.votes_count
+        ),
+        backgroundColor: [
+          "#ff829d",
+          "#ffd778",
+          "#98fb98",
+          "#afeeee",
+          "#f0e68c",
+          "#ffe4e1",
+        ],
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  // Prepare votes over time data for chart
+  const votesOverTimeData = {
+    labels: analyticsData.votes_over_time.map((item) => item.date),
+    datasets: [
+      {
+        label: "Votes Per Day",
+        data: analyticsData.votes_over_time.map((item) => item.count),
+        backgroundColor: "#5eb5ef",
+        borderWidth: 2,
+      },
+    ],
+  };
+
+  const barOptions = {
     responsive: true,
     plugins: {
       legend: {
         display: false,
-        position: "top",
       },
-      title: {
-        display: true,
-        text: "نتائج تصويت الجمهور لجائرة الدانة للدراما",
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  };
+
+  const doughnutOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "right",
       },
     },
   };
 
   return (
     <div className={style.container}>
+      {/* Total votes count */}
       <div className={style.box}>
-        <Doughnut data={data} options={{ responsive: true }} />
+        <h2>Total Votes: {analyticsData.total_votes}</h2>
+        <p>Last Updated: {analyticsData.last_updated}</p>
       </div>
 
-      <div className={style.box_two}>
-        <Bar data={data} options={options} />
+      {/* Series votes */}
+      <div className={style.box}>
+        <h2>أفضل مسلسل</h2>
+        <Bar
+          data={seriesData}
+          options={{
+            ...barOptions,
+            plugins: {
+              title: {
+                display: true,
+                text: "Male Actors Votes Count",
+              },
+            },
+          }}
+        />
+      </div>
+
+      {/* Male actors votes */}
+      <div className={style.box}>
+        <h2>أفضل ممثل</h2>
+        <Bar
+          data={maleActorsData}
+          options={{
+            ...barOptions,
+            plugins: {
+              title: {
+                display: true,
+                text: "Male Actors Votes Count",
+              },
+            },
+          }}
+        />
+      </div>
+
+      {/* Female actors votes */}
+      <div className={style.box}>
+        <h2>أفضل ممثلة</h2>
+        <Bar
+          data={femaleActorsData}
+          options={{
+            ...barOptions,
+            plugins: {
+              title: {
+                display: true,
+                text: "Female Actors Votes Count",
+              },
+            },
+          }}
+        />
+      </div>
+
+      {/* Votes over time */}
+      <div className={style.box}>
+        <h2>الأصوات بمرور الوقت</h2>
+        <Bar
+          data={votesOverTimeData}
+          options={{
+            ...barOptions,
+            plugins: {
+              title: {
+                display: true,
+                text: "Daily Votes Count",
+              },
+            },
+          }}
+        />
       </div>
     </div>
   );

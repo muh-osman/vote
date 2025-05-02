@@ -4,8 +4,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CandidateController;
-use App\Http\Controllers\VoterController;
+
+use App\Http\Controllers\Api\VoteController;
+use App\Http\Controllers\Api\SeriesController;
+use App\Http\Controllers\Api\MaleActorController;
+use App\Http\Controllers\Api\FemaleActorController;
 
 
 
@@ -30,13 +33,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     // API route to add candidates  (http://localhost:8000/api/candidates) [name]
-    Route::post('/candidates', [CandidateController::class, 'store']);
+    Route::post('/series', [SeriesController::class, 'store']);
+    Route::post('/male-actor', [MaleActorController::class, 'store']);
+    Route::post('/female-actor', [FemaleActorController::class, 'store']);
 
     // API route to get votes Count for all candidates  (http://localhost:8000/api/candidates/votes)
-    Route::get('/candidates/votes', [CandidateController::class, 'votesCount']);
-
+    Route::get('/analytics', [VoteController::class, 'analyticsVotes']);
     // API route to get all voters detailes   (http://localhost:8000/api/voters)
-    Route::get('/voters', [VoterController::class, 'index']);
+    Route::get('/voters', [VoteController::class, 'getAllVoters']);
 });
 
 
@@ -59,7 +63,8 @@ Route::middleware('guest')->group(function () {
 
 
 
-    // API route to vote  (http://localhost:8000/api/voters) [name, phone_number, vote]
-    Route::post('/voters', [VoterController::class, 'store']);
 
+
+    // API route to vote  (http://localhost:8000/api/vote) [name, phone_number, vote, ip]
+    Route::post('/vote', [VoteController::class, 'storeVote']);
 });

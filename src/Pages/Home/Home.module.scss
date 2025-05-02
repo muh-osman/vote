@@ -1,12 +1,28 @@
 .container {
-  background-color: #222629;
-  padding: 32px 64px 0px 64px;
+  // background-color: #24222a;
+  // background-color: #40384e;
+  background: linear-gradient(to bottom, #24222a, #40384e);
+  padding: 32px 32px 0px 32px;
   position: relative;
+
+  label {
+    -webkit-tap-highlight-color: transparent; /* For mobile browsers */
+  }
 
   nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .left_logo {
+      display: flex;
+      align-items: center;
+      width: 68px;
+    }
+    .right_logo {
+      display: flex;
+      align-items: center;
+    }
 
     div {
       width: 125px;
@@ -21,7 +37,8 @@
     padding: 3px 16px 0px 16px;
     height: 45px;
     margin: auto;
-    margin-top: 32px;
+    margin-top: 48px;
+    margin-bottom: 32px;
     color: #fff;
     width: fit-content;
     border: 3px solid #c5b152;
@@ -32,8 +49,8 @@
     width: 75%;
     color: #f1f1f1;
     margin: auto;
-    margin-top: 16px;
-    margin-bottom: 64px;
+    margin-top: 32px;
+    margin-bottom: 32px;
     text-align: center;
   }
 
@@ -55,7 +72,7 @@
 
     nav {
       div {
-        width: 100px;
+        // width: 100px;
       }
     }
 
@@ -68,7 +85,7 @@
 .form_box {
   margin: auto;
   margin-top: 32px;
-  width: 75%;
+  // width: 75%;
 
   label {
     color: #f1f1f1;
@@ -85,7 +102,7 @@
 
   .image_box {
     aspect-ratio: 1 / 1.2;
-    width: 200px;
+    width: 170px;
     border-radius: 16px;
     overflow: hidden;
     object-fit: cover;
@@ -102,6 +119,10 @@
     gap: 8px;
     justify-content: center;
     align-items: center;
+
+    @media (max-width: 575.98px) {
+      font-size: 14px;
+    }
   }
 
   button:disabled {
@@ -115,12 +136,13 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 64px;
+  gap: 32px;
 }
 
 @media (max-width: 575.98px) {
   .label_box {
-    gap: 32px;
+    gap: 16px;
+    justify-content: space-evenly;
   }
 
   .form_box {
@@ -139,11 +161,13 @@
 }
 
 .name_and_phnone_box {
+  margin: auto;
   margin-top: 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 70%;
 
   h2 {
     color: #fff;
@@ -206,66 +230,16 @@
 
 @media (max-width: 575.98px) {
   .name_and_phnone_box {
+    width: 100%;
+
+    h2 {
+      font-size: 22px;
+    }
+
     label {
       padding-right: 22px;
       font-size: 16px;
     }
-  }
-}
-
-.overlay {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 0vh;
-  transition: 0.3s;
-  overflow: hidden;
-  // background: url(../../Assets/Images/background.jpg);
-  // background-repeat: no-repeat;
-  // background-position: center;
-  // background-size: cover;
-
-  div {
-    position: absolute;
-    bottom: 75px;
-    left: 50%;
-    transform: translate(-50%);
-    z-index: 9999999;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-
-  h2 {
-    width: 100%;
-    text-align: center;
-    color: #f1f1f1;
-    font-weight: 800;
-    // width: 100%;
-    font-size: 32px;
-    width: fit-content;
-    border: 3px solid #c5b152;
-    border-radius: 16px;
-    padding: 0 10px;
-  }
-
-  h1 {
-    font-weight: 900;
-    font-size: 64px;
-    width: 100%;
-    text-align: center;
-    color: #c5b152;
-  }
-
-  .big {
-    height: 100%;
-    object-fit: cover;
   }
 }
 

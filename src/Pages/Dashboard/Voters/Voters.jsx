@@ -92,9 +92,9 @@ TablePaginationActions.propTypes = {
   rowsPerPage: PropTypes.number.isRequired,
 };
 
-function createData(id, name, phone, vote) {
-  return { id, name, phone, vote };
-}
+// function createData(id, name, phone, bestSeries, bestActor, bestActress) {
+//   return { id, name, phone, bestSeries, bestActor, bestActress };
+// }
 
 export default function Voters() {
   const [cookies] = useCookies(["token"]);
@@ -109,7 +109,7 @@ export default function Voters() {
           headers: { Authorization: `Bearer ${cookies.token}` },
         });
         // console.log(res.data);
-        setData(res.data);
+        setData(res.data.data);
       } catch (err) {
         console.error(err);
       }
@@ -140,7 +140,9 @@ export default function Voters() {
               <TableCell style={{ fontWeight: "bold" }}>ID</TableCell>
               <TableCell style={{ fontWeight: "bold" }}>Name</TableCell>
               <TableCell style={{ fontWeight: "bold" }}>Phone</TableCell>
-              <TableCell style={{ fontWeight: "bold" }}>Vote</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Best Series</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Best Actor</TableCell>
+              <TableCell style={{ fontWeight: "bold" }}>Best Actress</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -155,11 +157,16 @@ export default function Voters() {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
+                <TableCell style={{ width: 160 }}>{row.phone}</TableCell>
+
+                <TableCell style={{ width: 160 }}>{row.series.name}</TableCell>
+
                 <TableCell style={{ width: 160 }}>
-                  {row.phone_number}
+                  {row.male_actor.name}
                 </TableCell>
+
                 <TableCell style={{ width: 160 }}>
-                  {row.candidate.name}
+                  {row.female_actor.name}
                 </TableCell>
               </TableRow>
             ))}

@@ -23,6 +23,8 @@ import { useCookies } from "react-cookie";
 // Toastify
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// Image
+import backgroundImage from "../../Assets/Images/bg.jpg";
 
 function Copyright(props) {
   return (
@@ -33,7 +35,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link
+      {/* <Link
         color="inherit"
         component={RouterLink}
         to="/"
@@ -41,7 +43,7 @@ function Copyright(props) {
         onMouseOut={(e) => (e.target.style.color = "inherit")}
       >
         Gulf Festival
-      </Link>{" "}
+      </Link>{" "} */}
       {new Date().getFullYear()}
       {"."}
     </Typography>
@@ -126,8 +128,7 @@ export default function LogIn() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage:
-              "url(https://source.unsplash.com/random?wallpapers)",
+            backgroundImage: `url(${backgroundImage})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -137,6 +138,7 @@ export default function LogIn() {
             backgroundPosition: "center",
           }}
         />
+
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Box
             sx={{

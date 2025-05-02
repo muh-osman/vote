@@ -9,7 +9,7 @@ import Layout from "./Layout/Layout";
 import HomeLayout from "./Layout/HomeLayout";
 import Home from "./Pages/Home/Home";
 import LogIn from "./Pages/LogIn/LogIn";
-// import SignUp from "./Pages/SignUp/SignUp";
+import SignUp from "./Pages/SignUp/SignUp";
 // import VerifyEmail from "./Pages/VerifyEmail/VerifyEmail";
 // import ForgotPassword from "./Pages/ForgotPassword/ForgotPassword";
 // import ResetPassword from "./Pages/ResetPassword/ResetPassword";
@@ -21,6 +21,7 @@ import Voters from "./Pages/Dashboard/Voters/Voters";
 // import Add from "./Pages/Dashboard/Add/Add";
 // import Edit from "./Pages/Dashboard/Edit/Edit";
 import NotFound from "./Pages/NotFound/NotFound";
+import ThankYou from "./Pages/ThankYou/ThankYou";
 
 
 export default function App() {
@@ -30,12 +31,13 @@ export default function App() {
 
         <Route element={<HomeLayout />}>
           <Route index element={<Home />} />
+          <Route path="thankyou" element={<ThankYou />} />
         </Route>
 
         <Route element={<NotAuth />}>
         {/* Start Check if login */}
           <Route path="login" element={<LogIn />} />
-          {/* <Route path="signup" element={<SignUp />} /> */}
+          <Route path="signup" element={<SignUp />} />
           {/* <Route path="forgot-password" element={<ForgotPassword />} /> */}
           {/* <Route path="reset-password" element={<ResetPassword />} /> */}
         {/* End Check if login */}

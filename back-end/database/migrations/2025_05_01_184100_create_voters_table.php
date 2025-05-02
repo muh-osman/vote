@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('voters', function (Blueprint $table) {
             $table->id();
-            $table->string('internet_protocol')->unique();
             $table->string('name');
-            $table->string('phone_number')->unique();
-            $table->unsignedBigInteger('vote');
-            $table->foreign('vote')->references('id')->on('candidates');
+            $table->string('phone')->unique();
+            $table->string('ip_address');
+            $table->foreignId('series_id')->constrained();
+            $table->foreignId('male_actor_id')->constrained('male_actors');
+            $table->foreignId('female_actor_id')->constrained('female_actors');
             $table->timestamps();
         });
     }

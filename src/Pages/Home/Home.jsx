@@ -2,9 +2,11 @@
 import style from "./Home.module.scss";
 // React
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 // Logo
-import leftLogo from "../../Assets/Images/logo-left.jpg";
-import rightLogo from "../../Assets/Images/logo-right.jpg";
+import leftLogo from "../../Assets/Images/logo-left.png";
+import rightLogo from "../../Assets/Images/Minstry.png";
 // Images
 import A from "../../Assets/Images/a.jpg";
 import B from "../../Assets/Images/b.jpg";
@@ -12,11 +14,9 @@ import C from "../../Assets/Images/c.jpg";
 import D from "../../Assets/Images/d.jpg";
 import E from "../../Assets/Images/e.jpg";
 import F from "../../Assets/Images/f.jpg";
-import G from "../../Assets/Images/g.jpeg";
-import H from "../../Assets/Images/h.jpeg";
-import I from "../../Assets/Images/i.jpeg";
-import J from "../../Assets/Images/j.jpeg";
-import overlay from "../../Assets/Images/background.jpg";
+
+// import arc from "../../Assets/Images/arc.png";
+
 // API
 import api from "../../Utils/Api";
 // Cookies
@@ -35,7 +35,9 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedSeries, setSelectedSeries] = useState(null);
+  const [selectedMaleActor, setSelectedMaleActor] = useState(null);
+  const [selectedFemaleActor, setSelectedFemaleActor] = useState(null);
   const [countryCode, setCountryCode] = useState("");
 
   useEffect(() => {
@@ -75,21 +77,31 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const handleOptionChange = (option) => {
-    setSelectedOption(option);
+  //
+  const handleSeriesChange = (option) => {
+    setSelectedSeries(option);
   };
+
+  const handleMaleActorChange = (actor) => {
+    setSelectedMaleActor(actor);
+  };
+  const handleFemaleActorChange = (actor) => {
+    setSelectedFemaleActor(actor);
+  };
+  //
 
   const handleNameChange = (event) => {
     setName(event.target.value);
   };
 
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (cookies.isVoted || window.localStorage.getItem("isVoted")) {
-      toast.warn("عذراً .. لقد قمت بالتصويت مسبقاً.");
-      return;
-    }
+    // if (cookies.isVoted || window.localStorage.getItem("isVoted")) {
+    //   toast.warn("عذراً .. لقد قمت بالتصويت مسبقاً.");
+    //   return;
+    // }
 
     if (name.length < 3) {
       toast.warn("أدخل اسم صالح.");
@@ -102,25 +114,34 @@ export default function Home() {
     }
 
     setLoading(true);
-    try {
-      // const res = await api.post(`YOUR_API`, {
-      //   internet_protocol: ip,
-      //   name: name,
-      //   phone_number: phoneNumber,
-      //   vote: selectedOption,
-      // });
 
-      // console.log(ip);
-      // console.log(name);
-      // console.log(phoneNumber);
-      // console.log(selectedOption);
+    try {
+      const res = await api.post(`http://localhost:8000/api/vote`, {
+        name: name,
+        phone: phoneNumber,
+        series_id: selectedSeries,
+        male_actor_id: selectedMaleActor,
+        female_actor_id: selectedFemaleActor,
+        ip_address: ip,
+      });
+
+      console.log(selectedSeries);
+      console.log(selectedMaleActor);
+      console.log(selectedFemaleActor);
+
+      console.log(ip);
+
+      console.log(name);
+      console.log(phoneNumber);
 
       // console.log(res);
       // setLoading(false);
-      document.getElementById("overlay").style.height = "100vh";
-      document.querySelector("html").classList.add("stop-scrolling");
+      // document.getElementById("overlay").style.height = "100vh";
+      // document.querySelector("html").classList.add("stop-scrolling");
       window.localStorage.setItem("isVoted", "true");
       setCookie("isVoted", "true");
+
+      navigate("/thankyou", { replace: true });
     } catch (err) {
       console.error(err);
       setLoading(false);
@@ -130,6 +151,36 @@ export default function Home() {
       toast.warn("عذراً .. لقد قمت بالتصويت مسبقاً.");
     }
   };
+
+  // Movie options array
+  const series = [
+    { value: "1", label: "البوم", image: A },
+    { value: "2", label: "ثانوية النسيم", image: B },
+    { value: "3", label: "الخن", image: C },
+    { value: "4", label: "سكة سفر 3", image: D },
+    { value: "5", label: "خيوط المعازيب", image: E },
+    { value: "6", label: "رمضان شريف", image: F },
+  ];
+
+  // Movie options array
+  const maleActors = [
+    { value: "1", label: "عمر الشريف", image: A },
+    { value: "2", label: "عادل امام", image: B },
+    { value: "3", label: "نور الشريف", image: C },
+    { value: "4", label: "ياسر المصري", image: D },
+    { value: "5", label: "محمود العزيز", image: E },
+    { value: "6", label: "سعد الفرج", image: F },
+  ];
+
+  // Movie options array
+  const femaleActors = [
+    { value: "1", label: "يسرا", image: A },
+    { value: "2", label: "امينة خليل", image: B },
+    { value: "3", label: "صباح الجزائري", image: C },
+    { value: "4", label: "امل عرفة", image: D },
+    { value: "5", label: "هند صبري", image: E },
+    { value: "6", label: "دنيا غانم", image: F },
+  ];
 
   return (
     <div className={style.container}>
@@ -149,253 +200,107 @@ export default function Home() {
       />
       {/* End Toastify */}
       <nav>
-        <div className={style.left_logo}>
-          <img src={leftLogo} alt="logo" />
-        </div>
         <div className={style.right_logo}>
           <img src={rightLogo} alt="logo" />
         </div>
+        <div className={style.left_logo}>
+          <img src={leftLogo} alt="logo" />
+        </div>
       </nav>
 
-      <h4>جائزة تصويت الجمهور</h4>
       <p dir="rtl">
         ندعوكم للمشاركة في جائزة تصويت الجمهور لجائزة الدانة للدراما ضمن مهرجان
-        الخليج للإذاعة والتلفزيون في دورته السادسة عشرة! تمنحكم هذه الجائزة فرصة
-        اختيار عملكم المفضل من بين مجموعة من الأعمال المرشحة للفوز بالجائزة.
+        الخليج للإذاعة والتلفزيون في دورته السابعة عشر! تمنحكم هذه الجائزة فرصة
+        اختيار عملكم المفضل من بين مجموعة من الأعمال المرشحة .
       </p>
 
       <div className={style.form_box}>
         <form onSubmit={handleSubmit}>
+          <h4>أفضل مسلسل</h4>
           <div className={style.label_box}>
-            {/* 1 */}
-            <label dir="rtl">
-              <div
-                className={`${style.image_box} ${
-                  selectedOption === "1" ? "activeInput" : ""
-                }`}
-                onClick={() => handleOptionChange("1")}
-              >
-                <img src={A} alt="Option 1" />
-              </div>
-              <div className={style.label_text_box}>
-                <input
-                  type="radio"
-                  name="options"
-                  value="1"
-                  checked={selectedOption === "1"}
-                  onChange={() => handleOptionChange("1")}
-                  required
-                />
-                البوم
-              </div>
-            </label>
+            {series.map((option) => (
+              <label key={option.value} dir="rtl">
+                <div
+                  className={`${style.image_box} ${
+                    selectedSeries === option.value ? "activeInput" : ""
+                  }`}
+                  onClick={() => handleSeriesChange(option.value)}
+                >
+                  <img src={option.image} alt={`Option ${option.value}`} />
+                </div>
+                <div className={style.label_text_box}>
+                  <input
+                    type="radio"
+                    name="options"
+                    value={option.value}
+                    checked={selectedSeries === option.value}
+                    onChange={() => handleSeriesChange(option.value)}
+                    required
+                  />
+                  {option.label}
+                </div>
+              </label>
+            ))}
+          </div>
 
-            {/* 2 */}
-            <label dir="rtl">
-              <div
-                className={`${style.image_box} ${
-                  selectedOption === "2" ? "activeInput" : ""
-                }`}
-                onClick={() => handleOptionChange("2")}
-              >
-                <img src={B} alt="Option 2" />
-              </div>
-              <div className={style.label_text_box}>
-                <input
-                  type="radio"
-                  name="options"
-                  value="2"
-                  checked={selectedOption === "2"}
-                  onChange={() => handleOptionChange("2")}
-                  required
-                />
-                ثانوية النسيم
-              </div>
-            </label>
+          {/* <div style={{ height: "50px" }}>
+            <img style={{ width: "100%" }} src={arc} alt="arc" />
+          </div> */}
 
-            {/* 3 */}
-            <label dir="rtl">
-              <div
-                className={`${style.image_box} ${
-                  selectedOption === "3" ? "activeInput" : ""
-                }`}
-                onClick={() => handleOptionChange("3")}
-              >
-                <img src={C} alt="Option 3" />
-              </div>
-              <div className={style.label_text_box}>
-                <input
-                  type="radio"
-                  name="options"
-                  value="3"
-                  checked={selectedOption === "3"}
-                  onChange={() => handleOptionChange("3")}
-                  required
-                />
-                الخن
-              </div>
-            </label>
+          <h4>أفضل ممثل</h4>
+          {/* put maleActors here */}
+          <div className={style.label_box}>
+            {maleActors.map((actor) => (
+              <label key={actor.value} dir="rtl">
+                <div
+                  className={`${style.image_box} ${
+                    selectedMaleActor === actor.value ? "activeInput" : ""
+                  }`}
+                  onClick={() => handleMaleActorChange(actor.value)}
+                >
+                  <img src={actor.image} alt={`Actor ${actor.value}`} />
+                </div>
+                <div className={style.label_text_box}>
+                  <input
+                    type="radio"
+                    name="maleActors"
+                    value={actor.value}
+                    checked={selectedMaleActor === actor.value}
+                    onChange={() => handleMaleActorChange(actor.value)}
+                    required
+                  />
+                  {actor.label}
+                </div>
+              </label>
+            ))}
+          </div>
 
-            {/* 4 */}
-            <label dir="rtl">
-              <div
-                className={`${style.image_box} ${
-                  selectedOption === "4" ? "activeInput" : ""
-                }`}
-                onClick={() => handleOptionChange("4")}
-              >
-                <img src={D} alt="Option 4" />
-              </div>
-              <div className={style.label_text_box}>
-                <input
-                  type="radio"
-                  name="options"
-                  value="4"
-                  checked={selectedOption === "4"}
-                  onChange={() => handleOptionChange("4")}
-                  required
-                />
-                سكة سفر 3
-              </div>
-            </label>
-
-            {/* 5 */}
-            <label dir="rtl">
-              <div
-                className={`${style.image_box} ${
-                  selectedOption === "5" ? "activeInput" : ""
-                }`}
-                onClick={() => handleOptionChange("5")}
-              >
-                <img src={E} alt="Option 5" />
-              </div>
-              <div className={style.label_text_box}>
-                <input
-                  type="radio"
-                  name="options"
-                  value="5"
-                  checked={selectedOption === "5"}
-                  onChange={() => handleOptionChange("5")}
-                  required
-                />
-                خيوط المعازيب
-              </div>
-            </label>
-
-            {/* 6 */}
-            <label dir="rtl">
-              <div
-                className={`${style.image_box} ${
-                  selectedOption === "6" ? "activeInput" : ""
-                }`}
-                onClick={() => handleOptionChange("6")}
-              >
-                <img src={F} alt="Option 6" />
-              </div>
-              <div className={style.label_text_box}>
-                <input
-                  type="radio"
-                  name="options"
-                  value="6"
-                  checked={selectedOption === "6"}
-                  onChange={() => handleOptionChange("6")}
-                  required
-                />
-                رمضان شريف
-              </div>
-            </label>
-
-            {/* 7 */}
-            <label dir="rtl">
-              <div
-                className={`${style.image_box} ${
-                  selectedOption === "7" ? "activeInput" : ""
-                }`}
-                onClick={() => handleOptionChange("7")}
-              >
-                <img src={G} alt="Option 7" />
-              </div>
-              <div className={style.label_text_box}>
-                <input
-                  type="radio"
-                  name="options"
-                  value="7"
-                  checked={selectedOption === "7"}
-                  onChange={() => handleOptionChange("7")}
-                  required
-                />
-                الشرار
-              </div>
-            </label>
-
-            {/* 8 */}
-            <label dir="rtl">
-              <div
-                className={`${style.image_box} ${
-                  selectedOption === "8" ? "activeInput" : ""
-                }`}
-                onClick={() => handleOptionChange("8")}
-              >
-                <img src={H} alt="Option 8" />
-              </div>
-              <div className={style.label_text_box}>
-                <input
-                  type="radio"
-                  name="options"
-                  value="8"
-                  checked={selectedOption === "8"}
-                  onChange={() => handleOptionChange("8")}
-                  required
-                />
-                بيت أبونا
-              </div>
-            </label>
-
-            {/* 9 */}
-            <label dir="rtl">
-              <div
-                className={`${style.image_box} ${
-                  selectedOption === "9" ? "activeInput" : ""
-                }`}
-                onClick={() => handleOptionChange("9")}
-              >
-                <img src={I} alt="Option 9" />
-              </div>
-              <div className={style.label_text_box}>
-                <input
-                  type="radio"
-                  name="options"
-                  value="9"
-                  checked={selectedOption === "9"}
-                  onChange={() => handleOptionChange("9")}
-                  required
-                />
-                سندس ٢
-              </div>
-            </label>
-
-            {/* 10 */}
-            <label dir="rtl">
-              <div
-                className={`${style.image_box} ${
-                  selectedOption === "10" ? "activeInput" : ""
-                }`}
-                onClick={() => handleOptionChange("10")}
-              >
-                <img src={J} alt="Option 10" />
-              </div>
-              <div className={style.label_text_box}>
-                <input
-                  type="radio"
-                  name="options"
-                  value="10"
-                  checked={selectedOption === "10"}
-                  onChange={() => handleOptionChange("10")}
-                  required
-                />
-                كلاود كيتشن
-              </div>
-            </label>
+          <h4>أفضل ممثلة</h4>
+          {/* put femaleActors here */}
+          <div className={style.label_box}>
+            {femaleActors.map((actor) => (
+              <label key={actor.value} dir="rtl">
+                <div
+                  className={`${style.image_box} ${
+                    selectedFemaleActor === actor.value ? "activeInput" : ""
+                  }`}
+                  onClick={() => handleFemaleActorChange(actor.value)}
+                >
+                  <img src={actor.image} alt={`Actor ${actor.value}`} />
+                </div>
+                <div className={style.label_text_box}>
+                  <input
+                    type="radio"
+                    name="femaleActors"
+                    value={actor.value}
+                    checked={selectedFemaleActor === actor.value}
+                    onChange={() => handleFemaleActorChange(actor.value)}
+                    required
+                  />
+                  {actor.label}
+                </div>
+              </label>
+            ))}
           </div>
 
           <div dir="rtl" className={style.name_and_phnone_box}>
@@ -440,17 +345,16 @@ export default function Home() {
       </div>
 
       <footer>
-        جميع الحقوق محفوظة © مهرجان الخليج للإذاعة والتلفزيون 2024
+        جميع الحقوق محفوظة © مهرجان الخليج للإذاعة والتلفزيون 2025
       </footer>
 
-      <div className={style.overlay} id="overlay">
+      {/* <div className={style.overlay} id="overlay">
         <div>
-          {/* <h1>شكرا</h1> */}
-          {/* <h2>لمشاركتك في التصويت</h2> */}
-          <h2>عذرا.. انتهى التصويت</h2>
+          <h1>شكرا</h1>
+          <h2>لمشاركتك في التصويت</h2>
         </div>
         <img className={style.big} src={overlay} alt="overlay" />
-      </div>
+      </div> */}
     </div>
   );
 }

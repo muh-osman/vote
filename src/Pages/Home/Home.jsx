@@ -8,12 +8,13 @@ import { useNavigate } from "react-router-dom";
 import leftLogo from "../../Assets/Images/logo-left.png";
 import rightLogo from "../../Assets/Images/Minstry.png";
 // Images
-import A from "../../Assets/Images/a.jpg";
-import B from "../../Assets/Images/b.jpg";
-import C from "../../Assets/Images/c.jpg";
-import D from "../../Assets/Images/d.jpg";
-import E from "../../Assets/Images/e.jpg";
-import F from "../../Assets/Images/f.jpg";
+// import A from "../../Assets/Images/a.jpg";
+// import B from "../../Assets/Images/b.jpg";
+// import C from "../../Assets/Images/c.jpg";
+// import D from "../../Assets/Images/d.jpg";
+// import E from "../../Assets/Images/e.jpg";
+// import F from "../../Assets/Images/f.jpg";
+import zxc from "../../Assets/Images/zxc.jpg";
 
 // import arc from "../../Assets/Images/arc.png";
 
@@ -154,32 +155,32 @@ export default function Home() {
 
   // Movie options array
   const series = [
-    { value: "1", label: "البوم", image: A },
-    { value: "2", label: "ثانوية النسيم", image: B },
-    { value: "3", label: "الخن", image: C },
-    { value: "4", label: "سكة سفر 3", image: D },
-    { value: "5", label: "خيوط المعازيب", image: E },
-    { value: "6", label: "رمضان شريف", image: F },
+    { value: "1", label: "الدانا للدراما", image: zxc },
+    { value: "2", label: "الدانا للدراما", image: zxc },
+    { value: "3", label: "الدانا للدراما", image: zxc },
+    { value: "4", label: "الدانا للدراما", image: zxc },
+    { value: "5", label: "الدانا للدراما", image: zxc },
+    { value: "6", label: "الدانا للدراما", image: zxc },
   ];
 
   // Movie options array
   const maleActors = [
-    { value: "1", label: "عمر الشريف", image: A },
-    { value: "2", label: "عادل امام", image: B },
-    { value: "3", label: "نور الشريف", image: C },
-    { value: "4", label: "ياسر المصري", image: D },
-    { value: "5", label: "محمود العزيز", image: E },
-    { value: "6", label: "سعد الفرج", image: F },
+    { value: "1", label: "الدانا للدراما", image: zxc },
+    { value: "2", label: "الدانا للدراما", image: zxc },
+    { value: "3", label: "الدانا للدراما", image: zxc },
+    { value: "4", label: "الدانا للدراما", image: zxc },
+    { value: "5", label: "الدانا للدراما", image: zxc },
+    { value: "6", label: "الدانا للدراما", image: zxc },
   ];
 
   // Movie options array
   const femaleActors = [
-    { value: "1", label: "يسرا", image: A },
-    { value: "2", label: "امينة خليل", image: B },
-    { value: "3", label: "صباح الجزائري", image: C },
-    { value: "4", label: "امل عرفة", image: D },
-    { value: "5", label: "هند صبري", image: E },
-    { value: "6", label: "دنيا غانم", image: F },
+    { value: "1", label: "الدانا للدراما", image: zxc },
+    { value: "2", label: "الدانا للدراما", image: zxc },
+    { value: "3", label: "الدانا للدراما", image: zxc },
+    { value: "4", label: "الدانا للدراما", image: zxc },
+    { value: "5", label: "الدانا للدراما", image: zxc },
+    { value: "6", label: "الدانا للدراما", image: zxc },
   ];
 
   return (
@@ -211,7 +212,7 @@ export default function Home() {
       <p dir="rtl">
         ندعوكم للمشاركة في جائزة تصويت الجمهور لجائزة الدانة للدراما ضمن مهرجان
         الخليج للإذاعة والتلفزيون في دورته السابعة عشر! تمنحكم هذه الجائزة فرصة
-        اختيار عملكم المفضل من بين مجموعة من الأعمال المرشحة .
+        اختيار عملكم المفضل من بين مجموعة من الأعمال المرشحة.
       </p>
 
       <div className={style.form_box}>

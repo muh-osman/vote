@@ -349,7 +349,7 @@ export default function Home() {
         </form>
       </div>
 
-      <footer>جميع الحقوق محفوظة © جائزة الدانا للدراما 2025</footer>
+      <footer>جميع الحقوق محفوظة © جائزة الدانة للدراما 2025</footer>
 
       {/* <div className={style.overlay} id="overlay">
         <div>

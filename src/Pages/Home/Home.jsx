@@ -155,32 +155,32 @@ export default function Home() {
 
   // Movie options array
   const series = [
-    { value: "1", label: "الدانا للدراما", image: zxc },
-    { value: "2", label: "الدانا للدراما", image: zxc },
-    { value: "3", label: "الدانا للدراما", image: zxc },
-    { value: "4", label: "الدانا للدراما", image: zxc },
-    { value: "5", label: "الدانا للدراما", image: zxc },
-    { value: "6", label: "الدانا للدراما", image: zxc },
+    { value: "1", label: "الدانة للدراما", image: zxc },
+    { value: "2", label: "الدانة للدراما", image: zxc },
+    { value: "3", label: "الدانة للدراما", image: zxc },
+    { value: "4", label: "الدانة للدراما", image: zxc },
+    { value: "5", label: "الدانة للدراما", image: zxc },
+    { value: "6", label: "الدانة للدراما", image: zxc },
   ];
 
   // Movie options array
   const maleActors = [
-    { value: "1", label: "الدانا للدراما", image: zxc },
-    { value: "2", label: "الدانا للدراما", image: zxc },
-    { value: "3", label: "الدانا للدراما", image: zxc },
-    { value: "4", label: "الدانا للدراما", image: zxc },
-    { value: "5", label: "الدانا للدراما", image: zxc },
-    { value: "6", label: "الدانا للدراما", image: zxc },
+    { value: "1", label: "الدانة للدراما", image: zxc },
+    { value: "2", label: "الدانة للدراما", image: zxc },
+    { value: "3", label: "الدانة للدراما", image: zxc },
+    { value: "4", label: "الدانة للدراما", image: zxc },
+    { value: "5", label: "الدانة للدراما", image: zxc },
+    { value: "6", label: "الدانة للدراما", image: zxc },
   ];
 
   // Movie options array
   const femaleActors = [
-    { value: "1", label: "الدانا للدراما", image: zxc },
-    { value: "2", label: "الدانا للدراما", image: zxc },
-    { value: "3", label: "الدانا للدراما", image: zxc },
-    { value: "4", label: "الدانا للدراما", image: zxc },
-    { value: "5", label: "الدانا للدراما", image: zxc },
-    { value: "6", label: "الدانا للدراما", image: zxc },
+    { value: "1", label: "الدانة للدراما", image: zxc },
+    { value: "2", label: "الدانة للدراما", image: zxc },
+    { value: "3", label: "الدانة للدراما", image: zxc },
+    { value: "4", label: "الدانة للدراما", image: zxc },
+    { value: "5", label: "الدانة للدراما", image: zxc },
+    { value: "6", label: "الدانة للدراما", image: zxc },
   ];
 
   return (
@@ -209,13 +209,13 @@ export default function Home() {
         </div>
       </nav>
 
-      <h1 className={style.website_title}>جائزة الدانا للدراما | تصويت الجمهور</h1>
+      <h1 className={style.website_title}>جائزة الدانة للدراما | تصويت الجمهور</h1>
 
       <p dir="rtl">
         يسرنا دعوتكم للمشاركة في{" "}
         <span style={{ fontWeight: 900 }}>جائزة تصويت الجمهور</span> ضمن النسخة
         الثانية من <span style={{ fontWeight: 900 }}>جائزة الدانة للدراما</span>{" "}
-        تتيح لكم هذه الجائزة فرصة اختيار أفضل مسلسل، ممثل، وممثلة من بين
+        حيث تتيح لكم هذه الجائزة فرصة اختيار أفضل مسلسل، أفضل ممثل، وأفضل ممثلة من بين
         المرشحين.
       </p>
 

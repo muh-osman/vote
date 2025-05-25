@@ -8,13 +8,38 @@ import { useNavigate } from "react-router-dom";
 import leftLogo from "../../Assets/Images/logo-left.png";
 import rightLogo from "../../Assets/Images/Minstry.png";
 // Images
-// import A from "../../Assets/Images/a.jpg";
-// import B from "../../Assets/Images/b.jpg";
-// import C from "../../Assets/Images/c.jpg";
-// import D from "../../Assets/Images/d.jpg";
-// import E from "../../Assets/Images/e.jpg";
-// import F from "../../Assets/Images/f.jpg";
-import zxc from "../../Assets/Images/zxc.jpg";
+import A1 from "../../Assets/Images/series/1.jpg";
+import A2 from "../../Assets/Images/series/2.jpg";
+import A3 from "../../Assets/Images/series/3.jpg";
+import A4 from "../../Assets/Images/series/4.jpg";
+import A5 from "../../Assets/Images/series/5.jpg";
+import A6 from "../../Assets/Images/series/6.jpg";
+import A7 from "../../Assets/Images/series/7.jpeg";
+import A8 from "../../Assets/Images/series/8.jpg";
+import A9 from "../../Assets/Images/series/9.jpg";
+import A10 from "../../Assets/Images/series/10.jpg";
+import A11 from "../../Assets/Images/series/11.jpg";
+
+import B1 from "../../Assets/Images/maleActors/1.jpg";
+import B2 from "../../Assets/Images/maleActors/2.jpg";
+import B3 from "../../Assets/Images/maleActors/3.jpg";
+import B4 from "../../Assets/Images/maleActors/4.jpg";
+import B5 from "../../Assets/Images/maleActors/5.jpg";
+import B6 from "../../Assets/Images/maleActors/6.jpg";
+import B7 from "../../Assets/Images/maleActors/7.jpg";
+import B8 from "../../Assets/Images/maleActors/8.jpg";
+import B9 from "../../Assets/Images/maleActors/9.jpg";
+import B10 from "../../Assets/Images/maleActors/10.jpg";
+
+import C1 from "../../Assets/Images/femaleActors/1.jpg";
+import C2 from "../../Assets/Images/femaleActors/2.jpg";
+import C3 from "../../Assets/Images/femaleActors/3.jpg";
+import C4 from "../../Assets/Images/femaleActors/4.jpg";
+import C5 from "../../Assets/Images/femaleActors/5.jpg";
+import C6 from "../../Assets/Images/femaleActors/6.jpg";
+import C7 from "../../Assets/Images/femaleActors/7.jpg";
+import C8 from "../../Assets/Images/femaleActors/8.jpg";
+import C9 from "../../Assets/Images/femaleActors/9.jpg";
 
 // import arc from "../../Assets/Images/arc.png";
 
@@ -155,32 +180,74 @@ export default function Home() {
 
   // Movie options array
   const series = [
-    { value: "1", label: "الدانة للدراما", image: zxc },
-    { value: "2", label: "الدانة للدراما", image: zxc },
-    { value: "3", label: "الدانة للدراما", image: zxc },
-    { value: "4", label: "الدانة للدراما", image: zxc },
-    { value: "5", label: "الدانة للدراما", image: zxc },
-    { value: "6", label: "الدانة للدراما", image: zxc },
+    { value: "1", label: "عابر سبيل", image: A1 },
+    { value: "2", label: "وحوش", image: A2 },
+    { value: "3", label: "البوم", image: A3 },
+    { value: "4", label: "المسار", image: A4 },
+    { value: "5", label: "شارع الاعشى", image: A5 },
+    { value: "6", label: "سدف", image: A6 },
+    { value: "7", label: "ليالي الشميسي", image: A7 },
+    { value: "8", label: "يوميات رجال عانس", image: A8 },
+    { value: "9", label: "كائنات", image: A9 },
+    { value: "10", label: "أفكار امي", image: A10 },
+    { value: "11", label: "ام 44", image: A11 },
   ];
 
   // Movie options array
   const maleActors = [
-    { value: "1", label: "الدانة للدراما", image: zxc },
-    { value: "2", label: "الدانة للدراما", image: zxc },
-    { value: "3", label: "الدانة للدراما", image: zxc },
-    { value: "4", label: "الدانة للدراما", image: zxc },
-    { value: "5", label: "الدانة للدراما", image: zxc },
-    { value: "6", label: "الدانة للدراما", image: zxc },
+    {
+      value: "1",
+      label: "إبراهيم الحجاج",
+      sub: "مسلسل يوميات رجل عانس",
+      image: B1,
+    },
+    { value: "2", label: "أحمد النجار", sub: "مسلسل باب السين", image: B2 },
+    { value: "3", label: "حسين الحداد", sub: "مسلسل أفكار أمي", image: B3 },
+    { value: "4", label: "خالد صقر", sub: "مسلسل شارع الأعشى", image: B4 },
+    { value: "5", label: "عبدالله بوشهري", sub: "مسلسل عابر سبيل", image: B5 },
+    {
+      value: "6",
+      label: "عبدالمحسن النمر",
+      sub: "مسلسل عابر سبيل",
+      image: B6,
+    },
+    { value: "7", label: "علي كاكولي", sub: "مسلسل وحوش", image: B7 },
+    { value: "8", label: "فيصل العميري", sub: "مسلسل وحوش", image: B8 },
+    { value: "9", label: "محمد المنصور", sub: "مسلسل المسار", image: B9 },
+    { value: "10", label: "محمد ميرزا", sub: "مسلسل الفاشنيست", image: B10 },
   ];
 
   // Movie options array
   const femaleActors = [
-    { value: "1", label: "الدانة للدراما", image: zxc },
-    { value: "2", label: "الدانة للدراما", image: zxc },
-    { value: "3", label: "الدانة للدراما", image: zxc },
-    { value: "4", label: "الدانة للدراما", image: zxc },
-    { value: "5", label: "الدانة للدراما", image: zxc },
-    { value: "6", label: "الدانة للدراما", image: zxc },
+    { value: "1", label: "الهام الفضالة", sub: "مسلسل بيت حمولة", image: C1 },
+    {
+      value: "2",
+      label: "بيبي العبدالمحسن",
+      sub: "مسلسل الفاشنيستا",
+      image: C2,
+    },
+    {
+      value: "3",
+      label: "ريم ارحمه",
+      sub: "مسلسسل البث (خاطف من نوع أخر)",
+      image: C3,
+    },
+    {
+      value: "4",
+      label: "ريم عبدالله",
+      sub: "مسلسل ليالي الشميسي",
+      image: C4,
+    },
+    { value: "5", label: "شجون", sub: "مسلسل وحوش", image: C5 },
+    {
+      value: "6",
+      label: "فاطمة الشريف",
+      sub: "مسلسل يوميات رجل عانس",
+      image: C6,
+    },
+    { value: "7", label: "ليلى عبدالله", sub: "مسلسل عابر سبيل", image: C7 },
+    { value: "8", label: "هبة الدري", sub: "مسلسل أبو البنات", image: C8 },
+    { value: "9", label: "وفاء عامر", sub: "مسلسل عابر سبيل", image: C9 },
   ];
 
   return (
@@ -209,14 +276,16 @@ export default function Home() {
         </div>
       </nav>
 
-      <h1 className={style.website_title}>جائزة الدانة للدراما | تصويت الجمهور</h1>
+      <h1 className={style.website_title}>
+        جائزة الدانة للدراما | تصويت الجمهور
+      </h1>
 
       <p dir="rtl">
         يسرنا دعوتكم للمشاركة في{" "}
         <span style={{ fontWeight: 900 }}>جائزة تصويت الجمهور</span> ضمن النسخة
         الثانية من <span style={{ fontWeight: 900 }}>جائزة الدانة للدراما</span>{" "}
-        حيث تتيح لكم هذه الجائزة فرصة اختيار أفضل مسلسل، أفضل ممثل، وأفضل ممثلة من بين
-        المرشحين.
+        حيث تتيح لكم هذه الجائزة فرصة اختيار أفضل مسلسل، أفضل ممثل، وأفضل ممثلة
+        من بين المرشحين.
       </p>
 
       <div className={style.form_box}>
@@ -274,7 +343,10 @@ export default function Home() {
                     onChange={() => handleMaleActorChange(actor.value)}
                     required
                   />
-                  {actor.label}
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <div>{actor.label}</div>
+                    <div className={style.sub}>{actor.sub}</div>
+                  </div>
                 </div>
               </label>
             ))}
@@ -302,7 +374,10 @@ export default function Home() {
                     onChange={() => handleFemaleActorChange(actor.value)}
                     required
                   />
-                  {actor.label}
+                  <div style={{ display: "flex", flexDirection: "column" }}>
+                    <div>{actor.label}</div>
+                    <div className={style.sub}>{actor.sub}</div>
+                  </div>
                 </div>
               </label>
             ))}

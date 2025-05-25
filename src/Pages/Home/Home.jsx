@@ -129,6 +129,11 @@ export default function Home() {
     //   return;
     // }
 
+    if (!selectedSeries || !selectedMaleActor || !selectedFemaleActor) {
+      toast.warn("يرجى اختيار مرشح لكل فئة.");
+      return;
+    }
+
     if (name.length < 3) {
       toast.warn("أدخل اسم صالح.");
       return;
@@ -151,14 +156,14 @@ export default function Home() {
         ip_address: ip,
       });
 
-      console.log(selectedSeries);
-      console.log(selectedMaleActor);
-      console.log(selectedFemaleActor);
+      // console.log(selectedSeries);
+      // console.log(selectedMaleActor);
+      // console.log(selectedFemaleActor);
 
-      console.log(ip);
+      // console.log(ip);
 
-      console.log(name);
-      console.log(phoneNumber);
+      // console.log(name);
+      // console.log(phoneNumber);
 
       // console.log(res);
       // setLoading(false);
@@ -309,7 +314,7 @@ export default function Home() {
                     value={option.value}
                     checked={selectedSeries === option.value}
                     onChange={() => handleSeriesChange(option.value)}
-                    required
+                    className={style.hiddenRadio}
                   />
                   {option.label}
                 </div>
@@ -341,7 +346,7 @@ export default function Home() {
                     value={actor.value}
                     checked={selectedMaleActor === actor.value}
                     onChange={() => handleMaleActorChange(actor.value)}
-                    required
+                    className={style.hiddenRadio} // Add this class
                   />
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <div>{actor.label}</div>
@@ -372,7 +377,7 @@ export default function Home() {
                     value={actor.value}
                     checked={selectedFemaleActor === actor.value}
                     onChange={() => handleFemaleActorChange(actor.value)}
-                    required
+                    className={style.hiddenRadio} // Add this class
                   />
                   <div style={{ display: "flex", flexDirection: "column" }}>
                     <div>{actor.label}</div>
@@ -393,7 +398,6 @@ export default function Home() {
               type="text"
               name="name"
               id="name"
-              required
             />
 
             <label htmlFor="phone-number">رقم الهاتف</label>

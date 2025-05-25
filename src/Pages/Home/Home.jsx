@@ -40,6 +40,7 @@ import C6 from "../../Assets/Images/femaleActors/6.jpg";
 import C7 from "../../Assets/Images/femaleActors/7.jpg";
 import C8 from "../../Assets/Images/femaleActors/8.jpg";
 import C9 from "../../Assets/Images/femaleActors/9.jpg";
+import C10 from "../../Assets/Images/femaleActors/10.jpg";
 
 // import arc from "../../Assets/Images/arc.png";
 
@@ -253,6 +254,7 @@ export default function Home() {
     { value: "7", label: "ليلى عبدالله", sub: "مسلسل عابر سبيل", image: C7 },
     { value: "8", label: "هبة الدري", sub: "مسلسل أبو البنات", image: C8 },
     { value: "9", label: "وفاء عامر", sub: "مسلسل عابر سبيل", image: C9 },
+    { value: "10", label: "فاطمة الصفي", sub: "مسلسل ام 44", image: C10 },
   ];
 
   return (

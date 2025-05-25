@@ -111,15 +111,16 @@ export default function Dashboard() {
           (actor) => actor.votes_count
         ),
         backgroundColor: [
-          "#ff829d", // soft pink
-          "#ffd778", // light orange
-          "#98fb98", // pale green
-          "#afeeee", // pale turquoise
-          "#f0e68c", // khaki
-          "#ffe4e1", // misty rose
-          "#d8bfd8", // thistle
-          "#ffa07a", // light salmon
-          "#b0e0e6", // powder blue
+          "#5eb5ef", // Light blue
+          "#6fcdcd", // Teal
+          "#c2c4d1", // Light grayish blue
+          "#e2e2fa", // Lavender
+          "#f0e68c", // Khaki
+          "#ffe4e1", // Misty rose
+          "#98fb98", // Pale green
+          "#ffb6c1", // Light pink
+          "#ffa07a", // Light salmon
+          "#d8bfd8", // Thistle
         ],
         borderWidth: 2,
       },

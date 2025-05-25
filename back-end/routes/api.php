@@ -47,7 +47,7 @@ Route::middleware('auth:sanctum')->group(function () {
 // Group for guest routes
 Route::middleware('guest')->group(function () {
     // Register Route (http://localhost:8000/api/register)
-    Route::post('/register', [UserController::class, 'register']);
+    // Route::post('/register', [UserController::class, 'register']);
 
     // Login Route (http://localhost:8000/api/login)
     Route::post('/login', [UserController::class, 'login']);

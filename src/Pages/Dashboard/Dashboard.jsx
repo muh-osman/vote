@@ -60,12 +60,17 @@ export default function Dashboard() {
         label: "Votes Count",
         data: analyticsData.series_votes.map((series) => series.votes_count),
         backgroundColor: [
-          "#ff829d",
-          "#ffd778",
-          "#5eb5ef",
-          "#6fcdcd",
-          "#c2c4d1",
-          "#e2e2fa",
+          "#ff829d", // original pink
+          "#ffd778", // original yellow
+          "#5eb5ef", // original blue
+          "#6fcdcd", // original teal
+          "#c2c4d1", // original gray
+          "#e2e2fa", // original lavender
+          "#ffa07a", // light salmon (new)
+          "#98fb98", // pale green (new)
+          "#da70d6", // orchid (new)
+          "#ffb347", // orange (new)
+          "#9acd32", // yellow-green (new)
         ],
         borderWidth: 2,
       },
@@ -80,12 +85,16 @@ export default function Dashboard() {
         label: "Votes Count",
         data: analyticsData.male_actor_votes.map((actor) => actor.votes_count),
         backgroundColor: [
-          "#5eb5ef",
-          "#6fcdcd",
-          "#c2c4d1",
-          "#e2e2fa",
-          "#f0e68c",
-          "#ffe4e1",
+          "#5eb5ef", // Light blue
+          "#6fcdcd", // Teal
+          "#c2c4d1", // Light grayish blue
+          "#e2e2fa", // Lavender
+          "#f0e68c", // Khaki
+          "#ffe4e1", // Misty rose
+          "#98fb98", // Pale green
+          "#ffb6c1", // Light pink
+          "#ffa07a", // Light salmon
+          "#d8bfd8", // Thistle
         ],
         borderWidth: 2,
       },
@@ -102,12 +111,15 @@ export default function Dashboard() {
           (actor) => actor.votes_count
         ),
         backgroundColor: [
-          "#ff829d",
-          "#ffd778",
-          "#98fb98",
-          "#afeeee",
-          "#f0e68c",
-          "#ffe4e1",
+          "#ff829d", // soft pink
+          "#ffd778", // light orange
+          "#98fb98", // pale green
+          "#afeeee", // pale turquoise
+          "#f0e68c", // khaki
+          "#ffe4e1", // misty rose
+          "#d8bfd8", // thistle
+          "#ffa07a", // light salmon
+          "#b0e0e6", // powder blue
         ],
         borderWidth: 2,
       },
